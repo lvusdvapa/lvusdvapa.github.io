@@ -1692,7 +1692,7 @@ plan: {
       venue:  ev.venue || "",
       img:    ev.img || "",
       price:  price,
-      url:    ev.url || "",
+      url:    ev.url ? (/^https?:\/\//i.test(ev.url) ? ev.url : ("https://vivenu.com/event/" + ev.url)) : "",
       district: true
     };
   }
@@ -1708,7 +1708,7 @@ plan: {
       center: venueOf(ev),
       img:    ev.image || "",
       price:  free ? L.free : ("$" + p),
-      url:    ev.url || ""
+      url:    ev.url ? (/^https?:\/\//i.test(ev.url) ? ev.url : ("https://vivenu.com/event/" + ev.url)) : ""
     };
   }
 
