@@ -34,8 +34,12 @@
         <p class="pc-lede" data-t="hub.hero.lede"></p>
 
       </div>
-      <div class="pc-featured" data-featured></div>
+      <div class="lvusd-hero-gallery" role="group" aria-label="LVUSD student performance photographs">
+        <img class="lvusd-hero-photo is-visible" src="assets/hero/orchestra-pathways.jpg" alt="Orchestra Pathways concert performers on stage" decoding="async" fetchpriority="high">
+        <img class="lvusd-hero-photo" src="assets/hero/chs-clue.jpg" alt="CHS Clue cast performing on stage" decoding="async" loading="lazy">
+      </div>
     </div>
+    <div class="pc-wrap pc-event-rail" data-featured aria-label="Next upcoming performances"></div>
     </section>
 
     <section class="pc-sec pc-dark pc-artsband" data-anchor="arts">
@@ -59,7 +63,7 @@
         <div class="pc-quicklinks">
           <div class="pc-colh">LVUSD VAPA Resources</div>
 
-          <a class="pc-qlink" href="https://script.google.com/a/macros/lvusd.org/s/AKfycbx8gru5-IYWEbeqjZ6mUCkMIRZhXJBhfu4okk1aNFl5zUUR4tdiOmKe2C6zeGRDtajkIQ/exec"><span class="pc-qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4zM4 9h16M9 5v14"/></svg></span><span><b>Teacher Resources</b><small>LVUSD staff · Art Gallery Management</small></span></a>
+          <button class="pc-qlink pc-staff-quicklink" type="button" data-go="staffresources"><span class="pc-qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4zM4 9h16M9 5v14"/></svg></span><span><b>Staff Resources</b><small>For LVUSD staff · gallery management</small></span></button>
           <a class="pc-qlink" href="#"><span class="pc-qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4zM8 4v16M4 9h4M4 14h4M12 8h5M12 12h5M12 16h3"/></svg></span><span><b>Strategic Plan for the Arts</b><small>Our vision and goals</small></span></a>
           <a class="pc-qlink" href="#"><span class="pc-qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a1 1 0 011-1h11l4 4v11M8 8h6M8 12h8M8 16h5"/></svg></span><span><b>Curriculum</b><small>Arts pathways, TK&ndash;12</small></span></a>
           <a class="pc-qlink" href="#"><span class="pc-qic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></span><span><b>Donate to the Beacon for the Arts Fund</b><small>Support the arts</small></span></a>
@@ -125,9 +129,14 @@
 
   <div class="pc-pg pc-agoura" data-page="agoura">
     <div class="pc-bar">
-    <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-    <button class="pc-brand" data-go="agoura"><span class="pc-logo" data-logo="agoura"></span><span><b data-t="agoura.brand.name"></b><small data-t="agoura.brand.sub"></small></span></button>
-    <nav class="pc-nav"><button data-scroll="aseason" data-t="agoura.nav.season"></button><button data-scroll="aarts" data-t="agoura.nav.arts"></button><button data-go="rentals" data-t="agoura.nav.rentals"></button><button data-go="calabasas" data-t="agoura.nav.other"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
     <div class="pc-wrap pc-hero">
@@ -166,9 +175,14 @@
 
   <div class="pc-pg pc-cal" data-page="calabasas">
     <div class="pc-bar">
-    <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-    <button class="pc-brand" data-go="calabasas"><span class="pc-logo" data-logo="cal"></span><span><b data-t="calabasas.brand.name"></b><small data-t="calabasas.brand.sub"></small></span></button>
-    <nav class="pc-nav"><button data-scroll="cseason" data-t="calabasas.nav.season"></button><button data-scroll="carts" data-t="calabasas.nav.arts"></button><button data-go="rentals" data-t="calabasas.nav.rentals"></button><button data-go="agoura" data-t="calabasas.nav.other"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
     <div class="pc-wrap pc-hero">
@@ -207,9 +221,14 @@
 
   <div class="pc-pg pc-rent" data-page="rentals">
     <div class="pc-bar">
-    <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-    <button class="pc-brand" data-go="rentals"><span class="pc-logo" data-logo="shield"></span><span><b data-t="rentals.brand.name"></b><small data-t="rentals.brand.sub"></small></span></button>
-    <nav class="pc-nav"><button data-scroll="rspaces" data-t="rentals.nav.spaces"></button><button data-scroll="rgallery" data-t="rentals.nav.gallery"></button><button data-scroll="rtech" data-t="rentals.nav.tech"></button><button data-scroll="rcost" data-t="rentals.nav.cost"></button><button data-scroll="rbook" data-t="rentals.nav.book"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
     <div class="pc-wrap pc-hero">
@@ -324,9 +343,14 @@
 
   <div class="pc-pg pc-faq" data-page="faq">
     <div class="pc-bar">
-    <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-    <button class="pc-brand" data-go="faq"><span class="pc-logo" data-logo="shield"></span><span><b data-t="faq.brand.name"></b><small data-t="faq.brand.sub"></small></span></button>
-    <nav class="pc-nav"><button data-go="rentals" data-t="faq.nav.rentals"></button><button data-go="hub" data-t="faq.nav.plan"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
     <div class="pc-wrap pc-hero">
@@ -347,9 +371,14 @@
 
   <div class="pc-pg pc-music" data-page="music">
     <div class="pc-bar">
-    <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-    <button class="pc-brand" data-go="music"><span class="pc-logo" data-logo="shield"></span><span><b data-t="music.brand.name"></b><small data-t="music.brand.sub"></small></span></button>
-    <nav class="pc-nav"><button data-go="agoura" data-t="music.nav.agoura"></button><button data-go="calabasas" data-t="music.nav.calabasas"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
     <div class="pc-wrap pc-hero">
@@ -375,9 +404,14 @@
 
   <div class="pc-pg pc-disc" data-page="theatre">
     <div class="pc-bar">
-      <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-      <button class="pc-brand" data-go="theatre"><span class="pc-logo" data-logo="shield"></span><span><b data-t="theatre.brand.name"></b><small data-t="theatre.brand.sub"></small></span></button>
-      <nav class="pc-nav"><button data-go="agoura" data-t="theatre.nav.agoura"></button><button data-go="calabasas" data-t="theatre.nav.calabasas"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage"><div class="pc-stage-bg" data-bg="hub.hero.bg"></div>
       <div class="pc-wrap pc-hero">
@@ -399,9 +433,14 @@
 
   <div class="pc-pg pc-disc" data-page="dance">
     <div class="pc-bar">
-      <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-      <button class="pc-brand" data-go="dance"><span class="pc-logo" data-logo="shield"></span><span><b data-t="dance.brand.name"></b><small data-t="dance.brand.sub"></small></span></button>
-      <nav class="pc-nav"><button data-go="agoura" data-t="dance.nav.agoura"></button><button data-go="calabasas" data-t="dance.nav.calabasas"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
       <div class="pc-wrap pc-hero">
@@ -423,9 +462,14 @@
 
   <div class="pc-pg pc-disc" data-page="visual">
     <div class="pc-bar">
-      <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-      <button class="pc-brand" data-go="visual"><span class="pc-logo" data-logo="shield"></span><span><b data-t="visual.brand.name"></b><small data-t="visual.brand.sub"></small></span></button>
-      <nav class="pc-nav"><button data-go="agoura" data-t="visual.nav.agoura"></button><button data-go="calabasas" data-t="visual.nav.calabasas"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
       <div class="pc-wrap pc-hero">
@@ -437,19 +481,72 @@
         <div class="pc-hero-crest" data-logo="shield"></div>
       </div>
     </section>
+    <section class="pc-gallery-content pc-artcollection-intro">
+      <div class="pc-wrap">
+        <div class="pc-gallery-heading"><div><div class="pc-kicker">STUDENT ART COLLECTION</div><h1>Art from across LVUSD.</h1><p>Explore artworks by our student artists. Filter by school, grade, medium or style.</p></div><span class="pc-gallery-count" id="gallery-count">Loading gallery…</span></div>
+        <div class="pc-gallery-filters" aria-label="Filter student artwork">
+          <label>School<select id="gallery-school"><option value="">All schools</option></select></label>
+          <label>Grade Created<select id="gallery-grade"><option value="">All grades</option></select></label>
+          <label>School Year Created<select id="gallery-year"><option value="">All school years</option></select></label>
+          <label>Medium<select id="gallery-medium"><option value="">All mediums</option></select></label>
+          <label>Style<select id="gallery-style"><option value="">All styles</option></select></label>
+          <label>Search<input type="search" id="gallery-search" placeholder="Title or Artist" /></label>
+        </div>
+        <p class="pc-gallery-source" id="gallery-source" role="status">Loading approved gallery artwork…</p>
+        <div class="pc-gallery-grid" id="gallery-grid"></div>
+        <p class="pc-gallery-empty" id="gallery-empty" hidden>No artworks match these filters.</p>
+      </div>
+    </section>
+    <dialog class="pc-gallery-dialog" id="gallery-dialog" aria-label="Artwork details"><button id="gallery-close" aria-label="Close artwork details" type="button">×</button><img id="gallery-dialog-image" alt=""/><div><h2 id="gallery-dialog-title"></h2><p id="gallery-dialog-meta"></p></div></dialog>
+
     <section class="pc-sec">
       <div class="pc-wrap">
         <div class="pc-head"><div><div class="pc-kicker" data-t="visual.programs.kicker"></div><h2 data-t="visual.programs.heading"></h2><p data-t="visual.programs.text"></p></div></div>
         <div class="pc-dcols" data-dgroups="visual.programs.groups"></div>
       </div>
     </section>
+
+  </div>
+
+
+
+  <div class="pc-pg pc-disc pc-staff-page" data-page="staffresources">
+    <div class="pc-bar">
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
+    </div>
+    <section class="pc-staff-content">
+      <div class="pc-wrap">
+        <div class="pc-kicker">LVUSD STAFF RESOURCES</div>
+        <h1>Tools for our arts educators.</h1>
+        <p class="pc-staff-lede">Staff applications and resources for district visual and performing arts programs.</p>
+        <div class="pc-staff-card">
+          <div><span class="pc-staff-tag">VISUAL ARTS</span><h2>Art Gallery Management</h2>
+            <p>Submit artwork, edit exhibition information, review submissions, and manage the Student Art Collection.</p>
+            <p class="pc-staff-warning">Sign in with your LVUSD Google account. Access is limited to approved pilot staff.</p>
+          </div>
+          <div class="pc-staff-actions"><a href="https://script.google.com/a/macros/lvusd.org/s/AKfycbx8gru5-IYWEbeqjZ6mUCkMIRZhXJBhfu4okk1aNFl5zUUR4tdiOmKe2C6zeGRDtajkIQ/exec" class="pc-gallery-primary">Open Art Gallery Management ↗</a><button data-go="visual" class="pc-staff-alt" type="button">View public gallery</button></div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <div class="pc-pg pc-disc" data-page="stagecraft">
     <div class="pc-bar">
-      <button class="pc-back" data-go="hub" data-t="labels.backToHub"></button>
-      <button class="pc-brand" data-go="stagecraft"><span class="pc-logo" data-logo="shield"></span><span><b data-t="stagecraft.brand.name"></b><small data-t="stagecraft.brand.sub"></small></span></button>
-      <nav class="pc-nav"><button data-go="agoura" data-t="stagecraft.nav.agoura"></button><button data-go="calabasas" data-t="stagecraft.nav.calabasas"></button></nav>
+      <button class="pc-brand" data-go="hub" aria-label="LVUSD Visual and Performing Arts home"><span class="pc-logo" data-logo="shield"></span><span><b data-t="brand.name"></b><small data-t="brand.sub"></small></span></button>
+      <nav class="pc-nav" aria-label="Main navigation">
+        <button data-goscroll="hub:arts" data-t="hub.nav.arts"></button>
+        <button data-goscroll="hub:news" data-t="hub.nav.news"></button>
+        <button data-goscroll="hub:stages" data-t="hub.nav.centers"></button>
+        <button data-goscroll="hub:season" data-t="hub.nav.season"></button>
+        <button data-go="rentals" data-t="hub.nav.rentals"></button>
+      </nav>
     </div>
     <section class="pc-stage">
       <div class="pc-wrap pc-hero">
@@ -950,8 +1047,7 @@
 #paecs-app .pc-cfilter button:hover{border-color:var(--gold) !important;color:var(--dark) !important}
 #paecs-app .pc-cfilter button.pc-on{background:var(--dark) !important;border-color:var(--dark) !important;color:var(--paper) !important}
 
-/* smaller event cards on the hub (keep card design, just scaled) */
-#paecs-app .pc-events-compact{grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) !important;gap:1.1rem !important;max-height:none !important;overflow:visible !important;justify-content:start !important}
+/* smaller event cards on the hub (keep card design, just scaled) */#paecs-app .pc-events-compact{grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) !important;gap:1.1rem !important;max-height:none !important;overflow:visible !important;justify-content:start !important}
 #paecs-app .pc-events-compact .pc-art{padding-top:75% !important}
 #paecs-app .pc-events-compact .pc-body{padding:.9rem 1rem 1rem !important}
 #paecs-app .pc-events-compact .pc-body h3{font-size:.98rem !important}
@@ -969,6 +1065,136 @@
 
 #paecs-app .pc-evwhere{font-size:.8rem !important;color:var(--soft) !important;margin-top:.15rem !important;display:flex !important;align-items:center !important;gap:.35rem !important}
 #paecs-app .pc-evwhere::before{content:"" !important;display:inline-block !important;width:12px !important;height:12px !important;flex:none !important;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C6470' stroke-width='2'%3E%3Cpath d='M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") !important}
+
+/* Gallery additions are deliberately scoped to the LVUSD site to preserve its header and pages. */
+#paecs-app .pc-artcollection-intro{background:#f1e8d4 !important;color:#23313a !important;padding:3.2rem 0 4rem !important}
+#paecs-app .pc-artcollection-heading{display:flex;align-items:end;justify-content:space-between;gap:1.5rem;margin-bottom:1.5rem}
+#paecs-app .pc-artcollection-heading h2{font:600 clamp(2rem,4vw,3.1rem)/1.1 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.3rem 0 !important}
+#paecs-app .pc-artcollection-heading p{font-size:1rem;color:#526069 !important;margin:.6rem 0 !important}
+#paecs-app .pc-gallery-primary{border:0 !important;background:#0e5563 !important;color:white !important;border-radius:6px !important;padding:.9rem 1.2rem !important;font-weight:700 !important;white-space:nowrap;cursor:pointer}
+#paecs-app .pc-artpreview-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem}
+#paecs-app .pc-artpreview-cards button{text-align:left !important;border:0 !important;background:transparent !important;color:#26333c !important;padding:0 !important;cursor:pointer}
+#paecs-app .pc-artpreview-cards img{display:block;width:100%;height:225px;object-fit:cover;border-radius:9px;transition:transform .2s}
+#paecs-app .pc-artpreview-cards button:hover img{transform:translateY(-3px)}
+#paecs-app .pc-artpreview-cards span{font-size:.84rem;display:block;margin-top:.65rem;color:#45545d}
+#paecs-app .pc-gallery-page{--hero:#092530;--gold:#e3a21a}
+#paecs-app .pc-gallery-content{background:#f1e8d4 !important;color:#23313a !important;min-height:80vh;padding:3.4rem 0 4rem}
+#paecs-app .pc-gallery-heading{display:flex;justify-content:space-between;align-items:center;gap:2rem}
+#paecs-app .pc-gallery-heading h1{font:600 clamp(2.2rem,4.5vw,3.7rem)/1.1 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.45rem 0 !important}
+#paecs-app .pc-gallery-heading p{color:#526069 !important;font-size:1rem;line-height:1.5}
+#paecs-app .pc-gallery-count{border:1px solid #bfa77a;background:#faf7ef;border-radius:999px;padding:.4rem .85rem;font:600 .76rem/1.3 'Instrument Sans',sans-serif;color:#625024;white-space:nowrap}
+#paecs-app .pc-gallery-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem 1.2rem;margin:2rem 0 1.4rem}
+#paecs-app .pc-gallery-filters label{display:block;color:#2c3a43 !important;font:700 .82rem/1.35 'Instrument Sans',sans-serif !important}
+#paecs-app .pc-gallery-filters select,#paecs-app .pc-gallery-filters input{display:block;width:100%;height:47px;margin-top:.45rem;padding:.5rem .8rem;color:#28343e !important;background:#fffdf7 !important;border:1px solid #bcb5a8 !important;border-radius:7px !important;font:500 .9rem 'Instrument Sans',sans-serif !important;box-sizing:border-box}
+#paecs-app .pc-gallery-filters :is(select,input):focus-visible,#paecs-app .pc-gallery-dialog button:focus-visible{outline:3px solid #187da0 !important;outline-offset:2px}
+#paecs-app .pc-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem}
+#paecs-app .pc-gallery-card{border:0;background:transparent;padding:0;text-align:left;cursor:pointer;color:#27343c}
+#paecs-app .pc-gallery-card img{width:100%;height:340px;object-fit:cover;display:block;border-radius:10px;background:#ddd4c4}
+#paecs-app .pc-gallery-card strong{font:600 1.28rem/1.25 'Fraunces',Georgia,serif !important;display:block;margin:.75rem 0 .35rem;color:#202e36 !important}
+#paecs-app .pc-gallery-card span{display:block;font:.89rem/1.48 'Instrument Sans',sans-serif;color:#40515b !important}
+#paecs-app .pc-gallery-source,#paecs-app .pc-gallery-empty{font:.82rem/1.5 'Instrument Sans',sans-serif;color:#4a5961 !important;margin:0 0 1.3rem}
+#paecs-app .pc-gallery-footer{display:flex;align-items:center;gap:.8rem;justify-content:space-between;margin-top:3rem;border-top:1px solid #c4bcae;padding-top:1.2rem;color:#526169;font-size:.82rem}
+#paecs-app .pc-gallery-footer a{color:#0d6178 !important;text-decoration:underline;text-underline-offset:3px}
+#paecs-app .pc-gallery-dialog{border:0;border-radius:11px;padding:1rem;background:#f7f1e5;color:#1d2e39;max-width:min(850px,92vw);max-height:90vh;box-shadow:0 15px 55px #0006}
+#paecs-app .pc-gallery-dialog::backdrop{background:#081d2ec7}
+#paecs-app .pc-gallery-dialog img{display:block;max-width:100%;max-height:65vh;object-fit:contain;margin:auto}
+#paecs-app .pc-gallery-dialog div{padding:1rem .35rem .2rem}
+#paecs-app .pc-gallery-dialog h2{font:600 1.8rem Georgia,serif;color:#23313a}
+#paecs-app .pc-gallery-dialog p{color:#475861 !important}
+#paecs-app .pc-gallery-dialog button{float:right;background:#fff;border:1px solid #c9c0b3;width:35px;height:35px;border-radius:50%;cursor:pointer;font-size:1.4rem}
+@media(max-width:800px){#paecs-app .pc-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#paecs-app .pc-gallery-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){#paecs-app .pc-artcollection-heading,#paecs-app .pc-gallery-heading{display:block}#paecs-app .pc-gallery-primary{margin-top:1rem}#paecs-app .pc-gallery-grid,#paecs-app .pc-artpreview-cards{grid-template-columns:1fr}#paecs-app .pc-gallery-filters{grid-template-columns:1fr}#paecs-app .pc-gallery-footer{display:block}#paecs-app .pc-gallery-card img{height:300px}}
+
+
+/* Staff Resources view: reuse established typography, colors and page chrome. */
+#paecs-app .pc-staff-quicklink{width:100% !important;text-align:left !important;cursor:pointer !important}
+#paecs-app .pc-staff-content{background:#f1e8d4 !important;min-height:70vh !important;color:#23313a !important;padding:clamp(2.5rem,5vw,4rem) 0 5rem !important}
+#paecs-app .pc-staff-content h1{font:600 clamp(2rem,4vw,3.5rem)/1.12 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.5rem 0 1rem !important}
+#paecs-app .pc-staff-lede{color:#46555e !important;max-width:64ch !important;font-size:1.05rem !important}
+#paecs-app .pc-staff-card{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:2rem !important;margin-top:2rem !important;background:#fffdf8 !important;border:1px solid #d8cbb8 !important;border-radius:12px !important;padding:clamp(1.3rem,3vw,2.2rem) !important;box-shadow:0 8px 22px #1c33410b !important}
+#paecs-app .pc-staff-card h2{font:600 1.8rem/1.2 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.6rem 0 !important}
+#paecs-app .pc-staff-card p{color:#43525c !important;font-size:.96rem !important;line-height:1.55 !important;max-width:62ch}
+#paecs-app .pc-staff-tag{color:#086a86 !important;font-size:.75rem !important;letter-spacing:.14em !important;font-weight:700 !important}
+#paecs-app .pc-staff-warning{border-left:3px solid #be8d31 !important;padding-left:.9rem !important}
+#paecs-app .pc-staff-actions{display:flex !important;flex-direction:column !important;gap:.7rem !important;min-width:205px !important}
+#paecs-app .pc-staff-actions .pc-gallery-primary{text-decoration:none !important;text-align:center !important;display:block !important}
+#paecs-app .pc-staff-alt{border:1px solid #bac4c6 !important;border-radius:6px !important;background:#fff !important;color:#0e596e !important;padding:.8rem 1rem !important;font-weight:650 !important;cursor:pointer !important}
+#paecs-app .pc-gallery-stafflink{border:0 !important;color:#0d6178 !important;background:transparent !important;text-decoration:underline !important;text-underline-offset:3px !important;cursor:pointer !important;font:inherit !important}
+#paecs-app .pc-gallery-primary:focus-visible,#paecs-app .pc-staff-actions a:focus-visible,#paecs-app .pc-staff-actions button:focus-visible{outline:3px solid #167ca1 !important;outline-offset:3px !important}
+@media(max-width:720px){#paecs-app .pc-staff-card{display:block !important}#paecs-app .pc-staff-actions{margin-top:1.5rem !important}}
+
+/* Full student art gallery directly on the Visual Arts page, matching the approved filter treatment. */
+#paecs-app .pc-artcollection-intro.pc-gallery-content{background:#f1e8d4 !important;padding:3rem 0 4.2rem !important;min-height:0 !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-heading{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:1.5rem !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-count{display:inline-flex !important;align-items:center !important;justify-content:center !important;max-width:max-content !important;flex:0 0 auto !important;padding:.45rem .85rem !important;font-size:.75rem !important;line-height:1.2 !important;letter-spacing:0 !important;white-space:nowrap !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-filters{grid-template-columns:repeat(6,minmax(0,1fr)) !important;gap:1rem !important;margin:2rem 0 2.5rem !important;align-items:end !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-filters label{min-width:0 !important;font-size:.83rem !important;line-height:1.5 !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-filters select,#paecs-app .pc-artcollection-intro .pc-gallery-filters input{min-width:0 !important;height:56px !important;margin-top:.55rem !important;padding:.65rem .8rem !important;color:#283740 !important;background:#fffdfa !important;border:1px solid #c7beac !important;border-radius:9px !important;font-size:.9rem !important;font-weight:600 !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-filters input::placeholder{color:#687580 !important;opacity:1 !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:1.7rem !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-card strong{margin-top:.95rem !important;color:#202e36 !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-card span{color:#40515b !important}
+#paecs-app .pc-artcollection-intro .pc-gallery-source{font-size:.77rem !important;margin:0 0 1.3rem !important}
+@media(max-width:1150px){#paecs-app .pc-artcollection-intro .pc-gallery-filters{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media(max-width:760px){#paecs-app .pc-artcollection-intro .pc-gallery-filters{grid-template-columns:repeat(2,minmax(0,1fr)) !important}#paecs-app .pc-artcollection-intro .pc-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media(max-width:520px){#paecs-app .pc-artcollection-intro .pc-gallery-heading{display:block !important}#paecs-app .pc-artcollection-intro .pc-gallery-count{margin-top:.85rem !important}#paecs-app .pc-artcollection-intro .pc-gallery-filters{grid-template-columns:1fr !important}#paecs-app .pc-artcollection-intro .pc-gallery-grid{grid-template-columns:1fr !important}}
+
+
+/* === Combined preview: original repaired photo treatment + compact event strip === */
+#paecs-app [data-page="hub"] > .pc-stage .pc-hero{
+ display:grid !important; grid-template-columns:minmax(0,1.16fr) minmax(0,.84fr) !important;
+ align-items:center !important;gap:clamp(1rem,3vw,2rem) !important;
+ min-height:0 !important;padding-top:clamp(2rem,3.5vw,3rem) !important;
+ padding-bottom:clamp(1.2rem,2vw,1.6rem) !important;
+}
+#paecs-app [data-page="hub"] .lvusd-hero-gallery{
+ display:block !important;position:relative !important;align-self:center !important;
+ width:100% !important;height:clamp(200px,19vw,280px) !important;
+ min-height:200px !important;overflow:hidden !important;isolation:isolate !important;
+ -webkit-mask-image:radial-gradient(ellipse 80% 78% at 55% 50%,#000 48%,rgba(0,0,0,.8) 69%,transparent 99%) !important;
+ mask-image:radial-gradient(ellipse 80% 78% at 55% 50%,#000 48%,rgba(0,0,0,.8) 69%,transparent 99%) !important;
+}
+#paecs-app [data-page="hub"] .lvusd-hero-gallery .lvusd-hero-photo{
+ display:block !important;position:absolute !important;inset:0 !important;
+ width:100% !important;height:100% !important;max-width:none !important;
+ object-fit:cover !important;object-position:center 48% !important;
+ opacity:0 !important;visibility:visible !important;transform:none !important;
+ transition:opacity 4s ease-in-out !important;
+}
+#paecs-app [data-page="hub"] .lvusd-hero-gallery .lvusd-hero-photo.is-visible{opacity:1 !important;}
+#paecs-app .pc-event-rail{
+ position:relative !important;z-index:2 !important;display:flex !important;align-items:stretch !important;
+ gap:0 !important;border-top:1px solid rgba(246,241,230,.22) !important;
+ border-bottom:1px solid rgba(246,241,230,.16) !important;
+ padding-top:0 !important;padding-bottom:0 !important;margin-bottom:1.5rem !important;min-height:78px !important;
+}
+#paecs-app .pc-rail-label{flex:0 0 165px !important;display:flex !important;align-items:center !important;gap:.55rem !important;font-size:.68rem !important;text-transform:uppercase !important;letter-spacing:.12em !important;font-weight:700 !important;color:var(--gold) !important;}
+#paecs-app .pc-rail-dot{width:7px !important;height:7px !important;background:var(--gold) !important;border-radius:50% !important;box-shadow:0 0 9px rgba(227,162,26,.5) !important;}
+#paecs-app .pc-rail-items{flex:1 !important;display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;min-width:0 !important;}
+#paecs-app .pc-event-rail .pc-mini{border-bottom:0 !important;border-left:1px solid rgba(246,241,230,.13) !important;padding:.85rem 1.15rem !important;min-width:0 !important;gap:.65rem !important;}
+#paecs-app .pc-event-rail .pc-minipill{font-size:.55rem !important;}
+#paecs-app .pc-event-rail .pc-minititle{font-size:.83rem !important;}
+#paecs-app .pc-event-rail .pc-minimeta{font-size:.68rem !important;}
+#paecs-app .pc-event-rail .pc-miniticket{display:none !important;}
+#paecs-app .pc-rail-all{flex:0 0 115px !important;color:var(--gold) !important;font-weight:600 !important;font-size:.77rem !important;border-left:1px solid rgba(246,241,230,.13) !important;text-align:right !important;padding:.65rem 0 .65rem 1rem !important;white-space:nowrap !important;}
+#paecs-app .pc-rail-all:hover{color:var(--paper) !important;}
+@media(max-width:900px){
+ #paecs-app .pc-event-rail{flex-wrap:wrap !important;}
+ #paecs-app .pc-rail-label{flex:1 0 65% !important;padding:.8rem 0 !important;}
+ #paecs-app .pc-rail-all{flex:0 0 auto !important;order:1 !important;border-left:0 !important;padding:.8rem 0 !important;}
+ #paecs-app .pc-rail-items{flex:0 0 100% !important;order:2 !important;border-top:1px solid rgba(246,241,230,.13) !important;}
+ #paecs-app .pc-event-rail .pc-mini:first-child{border-left:0 !important;padding-left:0 !important;}
+}
+@media(max-width:560px){
+ #paecs-app .pc-rail-items{grid-template-columns:1fr !important;}
+ #paecs-app .pc-event-rail .pc-mini{border-left:0 !important;border-top:1px solid rgba(246,241,230,.13) !important;padding-left:0 !important;}
+}
+@media(max-width:760px){
+ #paecs-app [data-page="hub"] > .pc-stage .pc-hero{grid-template-columns:1fr !important;}
+ #paecs-app [data-page="hub"] .lvusd-hero-gallery{height:185px !important;min-height:185px !important;}
+}
+@media(prefers-reduced-motion:reduce){#paecs-app [data-page="hub"] .lvusd-hero-photo{transition:none !important;}}
+
 </style>
 <script>
 (function(){
@@ -1163,7 +1389,7 @@
     labels: {
       upcoming:    "Upcoming",
       past:        "Past",
-      backToHub:   "&larr; The PAECs",
+      backToHub:   "&larr; Back to VAPA Home",
       nextUp:      "Next up",
       tickets:     "Tickets &rarr;",
       reserve:     "Reserve seats &rarr;",
@@ -1814,8 +2040,14 @@ plan: {
     var up = EVENTS.filter(function(e){ return !isPast(e); })
                    .sort(function(a,b){ return dt(a.start) - dt(b.start); });
     if(!up.length){ box.innerHTML = '<div class="pc-mini-empty">' + (L.noneUpcoming || "No upcoming events right now.") + '</div>'; return; }
-    var head = '<div class="pc-mini-head">' + (L.upcomingTitle || "Upcoming Events") + '</div>';
-    box.innerHTML = head + '<div class="pc-mini-list">' + up.slice(0, 12).map(miniRow).join("") + '</div>';
+    var head = '<div class="pc-rail-label"><span class="pc-rail-dot"></span><span>Next on Stage</span></div>';
+    var rows = up.slice(0, 2).map(miniRow).join("");
+    var more = '<button class="pc-rail-all" type="button" data-scroll="season">All events <span aria-hidden="true">&rarr;</span></button>';
+    box.innerHTML = head + '<div class="pc-rail-items">' + rows + '</div>' + more;
+    var allButton = box.querySelector(".pc-rail-all");
+    if(allButton) allButton.addEventListener("click", function(){
+      var target = root.querySelector('[data-anchor="season"]');      if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
+    });
   }
 
   function initSeasons(){
@@ -2044,15 +2276,28 @@ plan: {
     });
   }
 
-  function showPage(name, anchor){
+  function showPage(name, anchor, fromHistory){
+    if(!root.querySelector('.pc-pg[data-page="' + name + '"]')) name = "hub";
     each(root.querySelectorAll(".pc-pg"), function(p){
       p.classList.toggle("pc-on", p.getAttribute("data-page") === name);
     });
+    if(!fromHistory) {
+      var dest = name === "hub" ? location.pathname + location.search : "#" + name;
+      var current = location.hash || "";
+      if((name === "hub" && current !== "") || (name !== "hub" && current !== "#" + name)) {
+        history.pushState({vapaPage:name}, "", dest);
+      }
+    }
     var target = null;
     if(anchor) target = root.querySelector('[data-anchor="' + anchor + '"]');
     var el = target || root;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 20, behavior: "smooth" });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 20, behavior: fromHistory ? "instant" : "smooth" });
   }
+
+  window.addEventListener("popstate", function(){
+    var page = location.hash.substring(1);
+    showPage(page || "hub", null, true);
+  });
 
   root.addEventListener("click", function(ev){
     if(!ev.target.closest) return;
@@ -2320,5 +2565,98 @@ plan: {
 
 </script>
 
+<script>
+
+(function(){
+  'use strict';
+  const feed='https://script.google.com/macros/s/AKfycbx8dLGEv6CBGBQwm7PzpfTDmzn0rmLVtdvEqKhbjj9MxaMEJDIP3ZPQK46B9-1zp61n/exec';
+  const sample=[
+    {title:'Anon',artist:'Student',school:'Agoura High',grade:'10',school_year_created:'',medium:'Paint',style:'Contemporary',image:'https://lh3.googleusercontent.com/d/18cMZLMxLr0lmF_j_ZQk1dIEZGvib2f6t'},
+    {title:'Anon',artist:'Student',school:'Agoura High',grade:'12',school_year_created:'',medium:'Oil Paint',style:'Contemporary',image:'https://lh3.googleusercontent.com/d/1IQCO-TK2mOf5tK3tDWpGTuNQPMiJMtBK'},
+    {title:'Skeleton Alien Cat',artist:'Student',school:'Agoura High',grade:'12',school_year_created:'',medium:'Oil Paint',style:'Contemporary',image:'https://lh3.googleusercontent.com/d/1SiSSrZhmtvizLndp3rQ4p9FcutnKRGZg'}
+  ];
+  const fileSample={'18cMZLMxLr0lmF_j_ZQk1dIEZGvib2f6t':sample[0].image,'1IQCO-TK2mOf5tK3tDWpGTuNQPMiJMtBK':sample[1].image,'1SiSSrZhmtvizLndp3rQ4p9FcutnKRGZg':sample[2].image};
+  const q=id=>document.getElementById(id);
+  let artworks=[];
+  let sampleMode=true;
+  const clean=v=>String(v==null?'':v).trim();
+  const norm=v=>clean(v).toLowerCase();
+  const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function normalize(r){
+    const id=clean(r.file_id||r.driveFileId||'');
+    const direct=clean(r.image||r.image_url||r.imageUrl||'');
+    const image=direct || fileSample[id] || (id ? 'https://lh3.googleusercontent.com/d/'+encodeURIComponent(id) : '');
+    return { title:clean(r.title)||'Untitled',artist:clean(r.artist||r.artistCredit)||'Student',school:clean(r.school),grade:clean(r.grade_created||r.gradeCreated||r.grade),year:clean(r.school_year_created||r.schoolYearCreated||r.school_year),medium:clean(r.medium),style:clean(r.style),image};
+  }
+  function populate(id,key){
+    const el=q(id);let val=el.value;
+    const keys=[...new Set(artworks.map(a=>a[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+    el.replaceChildren(el.options[0]);
+    keys.forEach(value=>{const opt=document.createElement('option');opt.value=value;opt.textContent=value;el.appendChild(opt);});
+    el.value=val;
+  }
+  function details(a){return [a.artist,a.school,a.grade?'Grade '+a.grade:'',a.year,a.medium].filter(Boolean).join(' · ')}
+  function render(){
+    const filters={school:q('gallery-school').value,grade:q('gallery-grade').value,year:q('gallery-year').value,medium:q('gallery-medium').value,style:q('gallery-style').value,search:norm(q('gallery-search').value)};
+    const selected=artworks.filter(a=>(!filters.school||a.school===filters.school)&&(!filters.grade||a.grade===filters.grade)&&(!filters.year||a.year===filters.year)&&(!filters.medium||a.medium===filters.medium)&&(!filters.style||a.style===filters.style)&&(!filters.search||norm(a.title+' '+a.artist).includes(filters.search)));
+    const grid=q('gallery-grid');grid.replaceChildren();
+    selected.forEach(a=>{
+      const b=document.createElement('button');b.type='button';b.className='pc-gallery-card';b.setAttribute('aria-label','View '+a.title);
+      const img=document.createElement('img');img.loading='lazy';img.alt=a.title+' student artwork';img.src=a.image;
+      img.addEventListener('error',()=>{img.removeAttribute('src');img.alt='Artwork image unavailable';});
+      const title=document.createElement('strong');title.textContent=a.title;
+      const meta=document.createElement('span');meta.textContent=details(a);
+      b.append(img,title,meta);b.addEventListener('click',()=>{
+        q('gallery-dialog-image').src=a.image;q('gallery-dialog-image').alt=img.alt;q('gallery-dialog-title').textContent=a.title;q('gallery-dialog-meta').textContent=details(a);q('gallery-dialog').showModal();
+      });grid.appendChild(b);
+    });
+    q('gallery-empty').hidden=selected.length>0;
+    q('gallery-count').textContent=artworks.length+' artworks'+(sampleMode?' · Preview':'');
+  }
+  async function init(){
+    try{
+      const res=await fetch(feed,{headers:{Accept:'application/json'}});if(!res.ok)throw Error('Feed unavailable');
+      const payload=await res.json();let rows=Array.isArray(payload)?payload:(payload.rows||payload.artworks||[]);
+      if(!Array.isArray(rows))throw Error('Unexpected feed format');
+      // Existing feed is the read-only Gallery sheet; if future status fields appear, honor only published entries.
+      artworks=rows.filter(r=>!clean(r.status)||/^(approved|published)$/i.test(clean(r.status))).map(normalize);
+      sampleMode=false;
+      q('gallery-source').textContent='Live gallery · approved/published artwork from the read-only LVUSD feed.';
+    }catch(e){
+      artworks=sample.map(normalize);sampleMode=true;
+      q('gallery-source').textContent='LOCAL PREVIEW DATA ONLY · the live publication feed could not be loaded. Not a verified live gallery.';
+    }
+    [['gallery-school','school'],['gallery-grade','grade'],['gallery-year','year'],['gallery-medium','medium'],['gallery-style','style']].forEach(([id,key])=>populate(id,key));
+    q('gallery-year').disabled=!artworks.some(a=>a.year);
+    q('gallery-year').title=q('gallery-year').disabled?'School year data is not yet present in the gallery feed.':'';
+    render();
+  }
+  ['gallery-school','gallery-grade','gallery-year','gallery-medium','gallery-style'].forEach(id=>q(id).addEventListener('change',render));
+  q('gallery-search').addEventListener('input',render);
+  q('gallery-close').addEventListener('click',()=>q('gallery-dialog').close());
+  q('gallery-dialog').addEventListener('click',ev=>{if(ev.target===q('gallery-dialog'))q('gallery-dialog').close()});
+  const requestedPage = new URLSearchParams(location.search).get('page') || location.hash.substring(1);
+  if (['visual','staffresources'].includes(requestedPage)) {
+    document.querySelectorAll('#paecs-app .pc-pg').forEach(p => p.classList.toggle('pc-on',p.getAttribute('data-page')===requestedPage));
+  }
+  init();
+})();
+
+</script>
+
+<script>
+(function(){
+  const images=Array.from(document.querySelectorAll('#paecs-app [data-page="hub"] .lvusd-hero-photo'));
+  if(images.length<2) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let active=0;
+  window.setInterval(function(){
+    const next=(active+1)%images.length;
+    images[next].classList.add('is-visible');
+    images[active].classList.remove('is-visible');
+    active=next;
+  },14000);
+})();
+</script>
 </body>
 </html>
