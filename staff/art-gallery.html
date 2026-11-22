@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LVUSD staff prototype for managing the Visual Arts gallery.">
+  <title>Art Gallery Management | LVUSD VAPA</title>
+  <link rel="stylesheet" href="../assets/css/gallery-management.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html#staffresources" aria-label="LVUSD VAPA staff resources">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span><strong>Las Virgenes Unified</strong><small>Visual &amp; Performing Arts · Staff</small></span>
+    </a>
+    <nav class="header-actions" aria-label="Utility navigation">
+      <span class="prototype-badge">Local prototype · not authenticated</span>
+      <a class="text-link" href="../index.html#gallery">View public gallery</a>
+      <span class="avatar-button" aria-label="Local preview mode">LP</span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Visual Arts · Staff workspace</p>
+        <h1 id="page-title">Art Gallery Management</h1>
+        <p class="lede">Upload student work, complete gallery details, and review what is ready to publish.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-secondary" href="../index.html#gallery">Open public gallery</a>
+        <button class="button button-primary" type="button" data-open-upload>Upload artwork</button>
+      </div>
+    </section>
+
+    <section class="shell notice" aria-label="Prototype safety notice">
+      <span class="notice-icon" aria-hidden="true">i</span>
+      <div><strong>Local-only staff prototype</strong><p>Changes stay in this browser. This is not LVUSD Google sign-in, and nothing is sent to Google Sheets, Drive, or the public gallery.</p></div>
+      <button class="notice-close" type="button" aria-label="Dismiss notice">×</button>
+    </section>
+
+    <section class="shell metrics" aria-label="Gallery overview">
+      <article><span class="metric-icon metric-amber" aria-hidden="true">◷</span><div><strong id="pending-count">0</strong><span>Awaiting review</span></div></article>
+      <article><span class="metric-icon metric-green" aria-hidden="true">✓</span><div><strong id="approved-count">0</strong><span>Approved</span></div></article>
+      <article><span class="metric-icon metric-blue" aria-hidden="true">●</span><div><strong id="published-count">0</strong><span>Published</span></div></article>
+      <article><span class="metric-icon metric-gray" aria-hidden="true">◇</span><div><strong id="draft-count">0</strong><span>Needs details</span></div></article>
+    </section>
+
+    <section class="shell workspace" aria-labelledby="collection-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Collection</p><h2 id="collection-title">Student artwork</h2></div>
+        <div class="view-toggle" role="group" aria-label="Display options">
+          <button class="active" type="button" data-view="table" aria-pressed="true" title="Table view">☷</button>
+          <button type="button" data-view="grid" aria-pressed="false" title="Grid view">▦</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-field"><span class="sr-only">Search artworks</span><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search title or artist credit"></label>
+        <label><span>School</span><select id="school-filter"><option value="">All schools</option></select></label>
+        <label><span>Grade Created</span><select id="grade-filter"><option value="">All grades</option></select></label>
+        <label><span>School Year Created</span><select id="year-filter"><option value="">All years</option></select></label>
+        <label><span>Status</span><select id="status-filter"><option value="">All statuses</option><option>Draft</option><option>Pending</option><option>Approved</option><option>Published</option><option>Needs changes</option></select></label>
+        <button id="clear-filters" class="clear-button" type="button">Clear</button>
+      </div>
+
+      <div class="selection-bar" id="selection-bar" hidden>
+        <strong><span id="selected-count">0</span> selected</strong>
+        <button type="button" data-bulk="approve">Approve</button>
+        <button type="button" data-bulk="changes">Request changes</button>
+        <button type="button" data-bulk="archive">Archive</button>
+      </div>
+
+      <div class="table-wrap" id="table-view">
+        <table>
+          <thead><tr><th><input id="select-all" type="checkbox" aria-label="Select all visible artworks"></th><th>Artwork</th><th>School / grade</th><th>Created</th><th>Medium / style</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
+          <tbody id="artwork-rows"></tbody>
+        </table>
+      </div>
+      <div class="card-grid" id="grid-view" hidden></div>
+      <p class="empty-state" id="empty-state" hidden>No artworks match these filters.</p>
+      <div class="collection-footer"><span id="result-count">0 artworks</span><button class="text-button" id="reset-data" type="button">Reset prototype data</button></div>
+    </section>
+
+    <section class="shell workflow-panel" aria-labelledby="workflow-title">
+      <div><p class="eyebrow">How publishing works</p><h2 id="workflow-title">A clear path from classroom to gallery</h2></div>
+      <ol>
+        <li><span>1</span><div><strong>Upload & describe</strong><p>Staff upload one or many images and add artwork details.</p></div></li>
+        <li><span>2</span><div><strong>Review</strong><p>An authorized reviewer checks quality, consent, and credit.</p></div></li>
+        <li><span>3</span><div><strong>Publish</strong><p>Approved records become eligible for the public gallery feed.</p></div></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell"><span>LVUSD Visual & Performing Arts</span><span>Staff prototype · local data only</span></div></footer>
+
+  <dialog id="upload-dialog" class="modal">
+    <form method="dialog" id="upload-form">
+      <div class="modal-header"><div><p class="eyebrow">New submission</p><h2>Upload artwork</h2></div><button class="icon-button" value="cancel" type="submit" aria-label="Close">×</button></div>
+      <div class="steps" aria-label="Upload progress"><span class="active">1 <small>Files</small></span><i></i><span>2 <small>Details</small></span><i></i><span>3 <small>Review</small></span></div>
+      <div id="upload-step-files">
+        <label class="drop-zone" id="drop-zone"><input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="upload-glyph" aria-hidden="true">↑</span><strong>Drag artwork images here</strong><span>or choose files · JPG, PNG, or WebP · up to 15 MB each</span></label>
+        <p class="privacy-note"><strong>Student privacy:</strong> use artwork-only images. Avoid student faces, full legal names, and other identifying information.</p>
+        <div class="modal-actions"><button class="button button-secondary" value="cancel" type="submit">Cancel</button><button class="button button-primary" id="continue-upload" type="button" disabled>Continue</button></div>
+      </div>
+      <div id="upload-step-details" hidden>
+        <div class="file-summary"><span class="art-thumb art-7" aria-hidden="true"></span><div><strong id="file-summary-name">Artwork image</strong><span id="file-summary-size">Ready for metadata</span></div><button type="button" id="change-files">Change</button></div>
+        <div class="form-grid">
+          <label class="span-2">Artwork title<input name="title" required placeholder="Untitled is okay"></label>
+          <label>Artist credit<input name="artist" required placeholder="First name + last initial, or Anonymous"></label>
+          <label>School<select name="school" required><option value="">Choose school</option><option>Agoura High</option><option>Calabasas High</option><option>A.E. Wright Middle</option><option>A.C. Stelle Middle</option><option>Lupin Hill Elementary</option><option>Mariposa School</option></select></label>
+          <label>Grade Created<select name="grade" required><option value="">Choose grade</option><option>K</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></label>
+          <label>School Year Created<select name="year" required><option value="">Choose year</option><option>2026–27</option><option>2025–26</option><option>2024–25</option><option>2023–24</option></select></label>
+          <label>Medium<input name="medium" required placeholder="e.g., Oil paint"></label>
+          <label>Style<input name="style" required placeholder="e.g., Observational"></label>
+          <label class="span-2 checkbox-label"><input name="consent" type="checkbox" required><span>I confirm this artwork is cleared for district publication and the artist credit follows district privacy guidance.</span></label>
+        </div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" id="back-upload">Back</button><button class="button button-primary" type="submit" value="default">Add to review queue</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="edit-dialog" class="modal modal-wide">
+    <form method="dialog" id="edit-form">
+      <input type="hidden" name="id">
+      <div class="modal-header"><div><p class="eyebrow">Artwork record</p><h2>Edit details</h2></div><button class="icon-button" value="cancel" type="submit" aria-label="Close">×</button></div>
+      <div class="edit-layout"><div class="edit-preview art-thumb art-1" id="edit-preview" aria-hidden="true"></div><div class="form-grid">
+        <label class="span-2">Artwork title<input name="title" required></label><label>Artist credit<input name="artist" required></label><label>School<input name="school" required></label><label>Grade Created<input name="grade" required></label><label>School Year Created<input name="year" required></label><label>Medium<input name="medium" required></label><label>Style<input name="style" required></label><label>Status<select name="status"><option>Draft</option><option>Pending</option><option>Approved</option><option>Published</option><option>Needs changes</option></select></label>
+      </div></div>
+      <div class="modal-actions"><button class="button button-secondary" value="cancel" type="submit">Cancel</button><button class="button button-primary" type="submit" value="default">Save changes</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../assets/js/gallery-management.js"></script>
+</body>
+</html>
