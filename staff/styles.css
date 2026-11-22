@@ -12,3 +12,8 @@
 .art-1{background-image:url("https://lh3.googleusercontent.com/d/18cMZLMxLr0lmF_j_ZQk1dIEZGvib2f6t") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
 .art-2{background-image:url("https://lh3.googleusercontent.com/d/1IQCO-TK2mOf5tK3tDWpGTuNQPMiJMtBK") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
 .art-3{background-image:url("https://lh3.googleusercontent.com/d/1SiSSrZhmtvizLndp3rQ4p9FcutnKRGZg") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
+
+/* Local original student-art previews: same files used in the public collection. */
+.art-1{background-image:url("../assets/visual-arts-gallery/lily-artwork.jpg") !important;background-position:center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e5e5df !important}
+.art-2{background-image:url("../assets/visual-arts-gallery/tiger-artwork.jpg") !important;background-position:center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e5e5df !important}
+.art-3{background-image:url("../assets/visual-arts-gallery/skeleton-alien-cat.jpg") !important;background-position:center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e5e5df !important}
