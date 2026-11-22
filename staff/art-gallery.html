@@ -14,6 +14,14 @@
     .art-thumb.art-3 { background: #e5e5df url("../assets/visual-arts-gallery/skeleton-alien-cat.jpg") center/cover no-repeat !important; }
   </style>
 
+
+  <style>
+    #upload-image-previews { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; width:100%; }
+    #upload-image-previews img { width:64px; height:64px; object-fit:cover; border-radius:6px; border:1px solid #cad4d9; }
+    #upload-file-status {font-size:.85rem; color:#245267; font-weight:650; margin:.1rem 0; }
+    #drop-zone #choose-files {min-height:38px; padding:.45rem .9rem;}
+    .drop-zone {padding:1.1rem;}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -104,13 +112,13 @@
   <footer class="site-footer"><div class="shell"><span>LVUSD Visual & Performing Arts</span><span>Staff prototype · local data only</span></div></footer>
 
   <dialog id="upload-dialog" class="modal">
-    <form method="dialog" id="upload-form">
-      <div class="modal-header"><div><p class="eyebrow">New submission</p><h2>Upload artwork</h2></div><button class="icon-button" value="cancel" type="submit" aria-label="Close">×</button></div>
+    <form id="upload-form" novalidate>
+      <div class="modal-header"><div><p class="eyebrow">New submission</p><h2>Upload artwork</h2></div><button class="icon-button" type="button" data-close-upload aria-label="Close">×</button></div>
       <div class="steps" aria-label="Upload progress"><span class="active">1 <small>Files</small></span><i></i><span>2 <small>Details</small></span><i></i><span>3 <small>Review</small></span></div>
       <div id="upload-step-files">
-        <label class="drop-zone" id="drop-zone"><input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple><span class="upload-glyph" aria-hidden="true">↑</span><strong>Drag artwork images here</strong><span>or choose files · JPG, PNG, or WebP · up to 15 MB each</span></label>
+        <div class="drop-zone" id="drop-zone"><input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><span class="upload-glyph" aria-hidden="true">↑</span><strong>Drag artwork images here</strong><button class="button button-secondary" type="button" id="choose-files">Choose images</button><span>JPG, PNG, or WebP · up to 15 MB each</span><p id="upload-file-status" role="status" aria-live="polite">No files selected</p><div id="upload-image-previews" class="upload-image-previews" aria-label="Selected artwork thumbnails"></div></div>
         <p class="privacy-note"><strong>Student privacy:</strong> use artwork-only images. Avoid student faces, full legal names, and other identifying information.</p>
-        <div class="modal-actions"><button class="button button-secondary" value="cancel" type="submit">Cancel</button><button class="button button-primary" id="continue-upload" type="button" disabled>Continue</button></div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-upload>Cancel</button><button class="button button-primary" id="continue-upload" type="button" disabled>Continue</button></div>
       </div>
       <div id="upload-step-details" hidden>
         <div class="file-summary"><span class="art-thumb art-7" aria-hidden="true"></span><div><strong id="file-summary-name">Artwork image</strong><span id="file-summary-size">Ready for metadata</span></div><button type="button" id="change-files">Change</button></div>
@@ -124,7 +132,7 @@
           <label>Style<input name="style" required placeholder="e.g., Observational"></label>
           <label class="span-2 checkbox-label"><input name="consent" type="checkbox" required><span>I confirm this artwork is cleared for district publication and the artist credit follows district privacy guidance.</span></label>
         </div>
-        <div class="modal-actions"><button class="button button-secondary" type="button" id="back-upload">Back</button><button class="button button-primary" type="submit" value="default">Add to review queue</button></div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" id="back-upload">Back</button><button class="button button-secondary" type="button" data-close-upload>Cancel</button><button class="button button-primary" type="submit">Add to review queue</button></div>
       </div>
     </form>
   </dialog>
