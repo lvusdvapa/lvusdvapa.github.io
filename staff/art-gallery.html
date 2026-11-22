@@ -138,13 +138,13 @@
   </dialog>
 
   <dialog id="edit-dialog" class="modal modal-wide">
-    <form method="dialog" id="edit-form">
+    <form id="edit-form" novalidate>
       <input type="hidden" name="id">
-      <div class="modal-header"><div><p class="eyebrow">Artwork record</p><h2>Edit details</h2></div><button class="icon-button" value="cancel" type="submit" aria-label="Close">×</button></div>
+      <div class="modal-header"><div><p class="eyebrow">Artwork record</p><h2>Edit details</h2></div><button class="icon-button" type="button" data-close-edit aria-label="Close">×</button></div>
       <div class="edit-layout"><div class="edit-preview art-thumb art-1" id="edit-preview" aria-hidden="true"></div><div class="form-grid">
         <label class="span-2">Artwork title<input name="title" required></label><label>Artist credit<input name="artist" required></label><label>School<input name="school" required></label><label>Grade Created<input name="grade" required></label><label>School Year Created<input name="year" required></label><label>Medium<input name="medium" required></label><label>Style<input name="style" required></label><label>Status<select name="status"><option>Draft</option><option>Pending</option><option>Approved</option><option>Published</option><option>Needs changes</option></select></label>
       </div></div>
-      <div class="modal-actions"><button class="button button-secondary" value="cancel" type="submit">Cancel</button><button class="button button-primary" type="submit" value="default">Save changes</button></div>
+      <div class="modal-actions"><button class="button button-secondary" type="button" data-close-edit>Cancel</button><button class="button button-primary" type="submit">Save changes</button></div>
     </form>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
