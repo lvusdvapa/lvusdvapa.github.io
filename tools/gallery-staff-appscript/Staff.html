@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base target="_top">
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#26343d;background:#f5f7f7;font-size:16px}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:#092d3a;color:#fff;padding:18px max(20px,calc((100% - 1160px)/2));display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.brand{font:700 21px Georgia,serif}.brand small{display:block;font:500 11px system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;opacity:.78;margin-top:3px}
+.identity{text-align:right;font-size:13px;color:#d5e3e6}.identity strong{display:block;color:#fff}
+main{width:min(1160px,calc(100% - 36px));margin:40px auto 80px}
+h1,h2{font-family:Georgia,serif;color:#172c37}h1{font-size:clamp(30px,5vw,44px);margin:8px 0}h2{font-size:25px;margin:0}
+.kicker{font-size:12px;color:#00759c;font-weight:750;letter-spacing:.17em;text-transform:uppercase}
+.lede{color:#596d75;line-height:1.5}.notice{border-left:4px solid #cb9725;background:#fff8de;padding:13px 17px;border-radius:5px;margin:25px 0}
+.columns{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(350px,1.3fr);gap:22px;align-items:start}
+.panel{background:#fff;border:1px solid #d4dfe2;border-radius:12px;box-shadow:0 3px 12px rgba(7,45,58,.035);padding:25px}
+.panel h2{margin-bottom:16px}.label{display:block;font-weight:700;font-size:13px;margin-top:14px;margin-bottom:5px}
+input,select,textarea{width:100%;border:1px solid #acbbc1;border-radius:7px;padding:11px;min-height:43px;background:#fff;color:#1d323c}
+input:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #4ca5bf;outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}.btn{border-radius:7px;padding:11px 15px;font-weight:700;border:1px solid #c0cbd0;background:#fff;color:#244354}
+.primary{background:#0074a0;color:#fff;border-color:#0074a0}.btn:disabled{opacity:.45;cursor:not-allowed}
+#image-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+#image-preview img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px}
+.selection{border:2px dashed #aac4d0;border-radius:9px;padding:18px;background:#f7fbfc}
+.muted{color:#5b6e77;font-size:13px;line-height:1.45}.check{display:flex;align-items:start;gap:10px;margin-top:17px}.check input{width:20px;min-height:20px;flex:none}
+.submissions{display:grid;gap:10px}.art{border:1px solid #d6e0e4;border-radius:9px;padding:14px;display:grid;grid-template-columns:85px 1fr;gap:12px}
+.art img{width:85px;height:82px;object-fit:cover;border-radius:6px;background:#e5e8e8}
+.art h3{font-size:16px;margin:0 0 5px}.art p{font-size:13px;margin:3px 0;color:#586b75}.chip{font-size:12px;border-radius:30px;background:#dfedf4;color:#0d5b78;padding:4px 8px;display:inline-block;margin:5px 0}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.actions .btn{font-size:12px;padding:7px 9px}
+#status{min-height:23px;color:#075f80;font-weight:650;margin:13px 0}
+[hidden]{display:none!important}.empty{color:#65747d;padding:20px;text-align:center;border:1px dashed #c1cdd2;border-radius:9px}
+@media(max-width:800px){.columns{grid-template-columns:1fr}.row{grid-template-columns:1fr}.identity{text-align:left}}
+</style>
+</head>
+<body>
+<header><div class="brand">Las Virgenes Unified<small>Visual &amp; Performing Arts · Gallery Management</small></div><div class="identity">Signed in with LVUSD Google<strong><?= staffEmail ?></strong><span id="role-label"><?= staffRole ?></span></div></header>
+<main>
+<p class="kicker">Staff Resources</p><h1>Student Art Gallery Management</h1>
+<p class="lede">Submit student work for review. Only authorized reviewers can approve and publish artwork to the public Visual Arts gallery.</p>
+<div class="notice"><strong>Publishing requires review.</strong> Uploaded images are held privately until a reviewer approves and publishes them. Verify district publication permissions before submission.</div>
+<div class="columns">
+<section class="panel"><h2>Submit artwork</h2><p class="muted">Upload individual or multiple JPG, PNG or WebP artwork photographs, up to 8 MB each. All files in a batch use the same metadata below.</p>
+<form id="upload-form">
+<div class="selection"><label class="label" for="files">Select artwork images</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><div id="image-preview" aria-label="Selected image previews"></div><p class="muted" id="selected-files">No files selected</p></div>
+<label class="label" for="title">Artwork title</label><input id="title" required maxlength="120" placeholder="Untitled is okay">
+<label class="label" for="artist">Artist credit</label><input id="artist" required maxlength="90" placeholder="Student or approved display credit" value="Student">
+<div class="row"><div><label class="label" for="school">School</label><select id="school" required><option value="">Select school</option></select></div><div><label class="label" for="grade">Grade Created</label><select id="grade" required><option value="">Choose grade</option><option>K</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div></div>
+<div class="row"><div><label class="label" for="year">School Year Created</label><select id="year" required><option value="">Choose year</option><option>2026–27</option><option>2025–26</option><option>2024–25</option><option>2023–24</option></select></div><div><label class="label" for="medium">Medium</label><input id="medium" required maxlength="60" placeholder="Oil paint, sculpture..."></div></div>
+<label class="label" for="style">Style</label><input id="style" required maxlength="60" value="Not specified">
+<label class="check"><input id="consent" type="checkbox" required><span class="muted">I have confirmed this artwork is cleared for district publication and the displayed artist credit complies with district privacy guidance.</span></label>
+<div id="status" role="status" aria-live="polite"></div><button class="btn primary" id="submit-button" type="submit">Submit to review queue</button><button class="btn" type="reset">Clear</button>
+</form></section>
+<section class="panel"><h2>Review queue</h2><p class="muted" id="queue-message">Loading submissions…</p><div class="submissions" id="submissions"></div></section>
+</div></main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),state={role:null,records:[],loading:false,files:[]};
+const schools=['Agoura High','Calabasas High','Lindero Canyon Middle School','A.C. Stelle Middle School','A.E. Wright Middle School','Bay Laurel Elementary','Buttercup Preschool','Chaparral Elementary','Lupin Hill Elementary','Mariposa Elementary','Round Meadow Elementary','Sumac Elementary','White Oak Elementary','Willow Elementary','Yerba Buena Elementary'];
+for(const school of schools){const o=document.createElement('option');o.textContent=school;o.value=school;$('school').append(o);}
+function msg(text){$('status').textContent=text;}
+function call(method,...args){return new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(new Error(e.message||String(e))))[method](...args));}
+function img(file){return new Promise((res,rej)=>{const reader=new FileReader();reader.onload=()=>res(String(reader.result).split(',')[1]);reader.onerror=()=>rej(new Error('File read failed'));reader.readAsDataURL(file);});}
+function draw(){
+ $('submissions').replaceChildren();$('queue-message').textContent=state.records.length+' submission(s)';
+ if(!state.records.length){const x=document.createElement('p');x.className='empty';x.textContent='There are no submissions yet.';$('submissions').append(x);return;}
+ for(const art of state.records){
+  const row=document.createElement('article');row.className='art';
+  const photo=document.createElement('img');photo.alt='Artwork preview';photo.loading='lazy';
+  photo.addEventListener('error',()=>{photo.alt='Preview unavailable';});
+  const copy=document.createElement('div');
+  const title=document.createElement('h3');title.textContent=art.title;copy.append(title);
+  const details=document.createElement('p');details.textContent=[art.artist,art.school,'Grade '+art.gradeCreated,art.schoolYearCreated,art.medium].join(' · ');copy.append(details);
+  const chip=document.createElement('span');chip.className='chip';chip.textContent=art.status;copy.append(chip);
+  if(art.reviewNote){const note=document.createElement('p');note.textContent='Reviewer: '+art.reviewNote;copy.append(note);}
+  const actions=document.createElement('div');actions.className='actions';
+  const previewButton=document.createElement('button');previewButton.type='button';previewButton.className='btn';previewButton.textContent='View image';previewButton.onclick=async()=>{previewButton.disabled=true;try{photo.src=await call('getArtworkPreview',art.id);}catch(e){msg(e.message);}finally{previewButton.disabled=false;}};
+  actions.append(previewButton);
+  if(state.role==='reviewer'||state.role==='admin'){
+   const options=art.status==='Pending'?[['approve','Approve'],['changes','Request changes']]:art.status==='Approved'?[['publish','Publish'],['changes','Request changes']]:art.status==='Published'?[['unpublish','Unpublish']]:[];
+   for(const [decision,label] of options){const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=label;btn.onclick=async()=>{
+      let note='';if(decision==='changes'){note=prompt('What should the teacher change?')||'';if(!note.trim())return;}
+      if(['publish','unpublish'].includes(decision)&&!confirm(label+' this artwork?'))return;
+      btn.disabled=true;try{await call('reviewArtwork',art.id,decision,note);msg('Artwork updated.');await reload();}catch(e){msg(e.message);}finally{btn.disabled=false;}
+   };actions.append(btn);}
+  }
+  copy.append(actions);row.append(photo,copy);$('submissions').append(row);
+ }
+}
+async function reload(){const data=await call('getStaffBootstrap');state.role=data.role;state.records=data.items;$('role-label').textContent=data.role;draw();}
+$('files').addEventListener('change',()=>{const files=Array.from($('files').files||[]);state.files=files;$('image-preview').replaceChildren();$('selected-files').textContent=files.length+' files selected';for(const f of files.slice(0,8)){const image=document.createElement('img'),url=URL.createObjectURL(f);image.src=url;image.alt=f.name;image.onload=()=>URL.revokeObjectURL(url);$('image-preview').append(image);}});
+$('upload-form').addEventListener('reset',()=>{state.files=[];$('image-preview').replaceChildren();$('selected-files').textContent='No files selected';msg('');});
+$('upload-form').addEventListener('submit',async event=>{
+ event.preventDefault();if(state.loading)return;
+ const files=state.files;if(!files.length){msg('Choose at least one image.');return;}
+ if(files.some(f=>f.size>8*1024*1024||!['image/jpeg','image/png','image/webp'].includes(f.type))){msg('Only JPG, PNG, or WebP images under 8 MB can be submitted.');return;}
+ state.loading=true;$('submit-button').disabled=true;
+ try{
+  for(let i=0;i<files.length;i++){
+   msg('Uploading artwork '+(i+1)+' of '+files.length+'…');
+   const req={base64:await img(files[i]),title:$('title').value,artist:$('artist').value,school:$('school').value,gradeCreated:$('grade').value,schoolYearCreated:$('year').value,medium:$('medium').value,style:$('style').value,consentConfirmed:$('consent').checked};
+   await call('submitArtwork',req);
+  }
+  $('upload-form').reset();msg(files.length+' artwork(s) added to the private review queue.');await reload();
+ }catch(e){msg('Upload stopped: '+e.message+' (earlier images may have been received).');}
+ finally{state.loading=false;$('submit-button').disabled=false;}
+});
+reload().catch(e=>{msg(e.message);$('queue-message').textContent='Access or configuration error.';});
+})();
+</script>
+</body>
+</html>
