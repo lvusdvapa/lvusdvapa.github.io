@@ -1,6 +1,26 @@
 # LVUSD Student Art Collection: authenticated staff application (staging)
 
-**Status: Source code only, NOT deployed.** This is not yet a live login system. The separate public gallery at `lvusdvapa.github.io` is unaffected.
+**Status (2026-11-22): deployed to the TEST ONLY Apps Script project and tested end-to-end against the TEST sheets/folder.** Production Sheets, Drive folders, the public feed script and the `main` branch are unchanged. The public Visual Arts page still reads the production feed.
+
+## Staff dashboard (Staff.html)
+
+`Staff.html` reproduces the original `staff/art-gallery.html` management dashboard (same CSS design system) and calls only real server functions via `google.script.run`. Nothing is stored in localStorage.
+
+| Feature | Server function(s) |
+|---|---|
+| Header identity/role, metrics, table + grid views, search/school/grade/year/status filters | `getStaffBootstrap` |
+| Drive thumbnails in table/grid | `getArtworkThumbnails` (Drive thumbnail, falls back to the original) |
+| Full-resolution preview (lightbox and edit panel) | `getArtworkImage`, which returns the original Drive bytes. Files are never made public just to preview them. |
+| 3-step upload (Files → Details → Review, per-image titles, per-file progress/retry) | `submitArtwork` (one call per image, 8 MB cap, magic-byte check, saved-size verification) |
+| Edit panel | `updateArtwork`: teachers can edit their own Pending/Needs Changes work, which re-queues it. Reviewers can edit any non-archived work, and edits to Published work also update the public row. |
+| Approve / Request changes / Publish / Unpublish / Archive / Restore | `reviewArtwork` (reviewer/admin only, enforced server-side) |
+| Bulk selection bar | `reviewArtworks` (per-item validation) |
+| Public gallery feed panel | `getPublicGalleryPreview` (reads the configured public sheet; images via the public `lh3.googleusercontent.com/d/<id>` link the Visual Arts page uses) |
+
+### Test record
+- Offline: `node tests/security.spec.cjs` (16), `node tests/workflow.spec.cjs` (47), `npm i jsdom && node tests/ui.spec.cjs` (32). The UI test drives the real Staff.html against the real Code.gs on mocked Google services.
+- Live TEST run (cbloom@lvusd.org, pilot reviewer): upload (Drive file private, byte-for-byte size match) → full-res preview (956×492 original) → edit → approve → publish (public sheet row written; image fetched anonymously with HTTP 200) → feed panel → unpublish (row removed, Drive file PRIVATE, anonymous fetch fails). `DISTRICT_APPROVED_PUBLIC_SHARING` was set to YES only for the run and then returned to NO.
+- The TEST project runs in pilot mode (`PILOT_EMAIL_ONLY=YES`); its live manifest has no Admin Directory service. Group-based roles were tested only offline.
 
 ## Architecture
 
