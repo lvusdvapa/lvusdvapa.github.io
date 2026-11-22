@@ -390,10 +390,10 @@ function requestThumbs(ids){
   for(let i=0;i<need.length;i+=20){
     const chunk=need.slice(i,i+20);
     thumbQueue=thumbQueue.then(()=>call('getArtworkThumbnails',chunk)).then(map=>{
-      chunk.forEach(id=>{const url=map&&map[id];if(url)state.thumbs.set(id,url);else if(state.full.has(id))state.thumbs.set(id,state.full.get(id).dataUrl);else state.thumbs.set(id,'');});
+      chunk.forEach(id=>{const url=map&&map[id];if(url)state.thumbs.set(id,url);else if(state.full.has(id))state.thumbs.set(id,showSrc(state.full.get(id)));else state.thumbs.set(id,'');});
       applyThumbs();
       // Thumbnails Drive could not generate yet: fall back to the original image.
-      chunk.filter(id=>!state.thumbs.get(id)).forEach(id=>fullImage(id).then(img=>{state.thumbs.set(id,img.dataUrl);applyThumbs();}).catch(()=>{}));
+      chunk.filter(id=>!state.thumbs.get(id)).forEach(id=>fullImage(id).then(img=>{state.thumbs.set(id,showSrc(img));applyThumbs();}).catch(()=>{}));
     }).catch(()=>{chunk.forEach(id=>state.thumbRequested.delete(id));applyThumbs();});
   }
 }
@@ -408,6 +408,8 @@ function fullImage(id){
   },e=>{fullImage.pending.delete(id);throw e;});
   fullImage.pending.set(id,p);return p;
 }
+const showSrc=img=>img.browserSafe===false?(img.publicUrl||img.dataUrl||''):img.dataUrl;
+const heicNote=img=>`HEIC original · ${fmtBytes(img.bytes)} · showing a Drive-converted preview (this browser can't display HEIC)`;
 function fmtBytes(n){return n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';}
 
 async function openLightbox(id){
@@ -418,8 +420,9 @@ async function openLightbox(id){
   if(!box.open)box.showModal();
   try{
     const full=await fullImage(id);
-    img.onload=()=>{$('#lightbox-meta').textContent=`${img.naturalWidth} × ${img.naturalHeight} px · ${fmtBytes(full.bytes)} · ${full.mimeType.replace('image/','').toUpperCase()}`;};
-    img.src=full.dataUrl;img.alt=a.title+' by '+a.artist;img.hidden=false;$('#lightbox-status').hidden=true;
+    const src=showSrc(full);if(!src)throw new Error('No browser-viewable preview is available for this HEIC file.');
+    img.onload=()=>{$('#lightbox-meta').textContent=full.browserSafe===false?heicNote(full):`${img.naturalWidth} × ${img.naturalHeight} px · ${fmtBytes(full.bytes)} · ${full.mimeType.replace('image/','').toUpperCase()}`;};
+    img.src=src;img.alt=a.title+' by '+a.artist;img.hidden=false;$('#lightbox-status').hidden=true;
   }catch(e){$('#lightbox-status').textContent=e.message;}
 }
 $('#lightbox-close').addEventListener('click',()=>$('#lightbox').close());
@@ -590,7 +593,7 @@ function canEdit(a){return state.canReview?a.status!=='Archived':['Pending','Nee
 function openEdit(id){
   const a=byId(id);if(!a)return;const f=editForm.elements,token=++editToken;
   f.id.value=a.id;f.title.value=a.title;f.artist.value=a.artist;
-  fillSelect(f.school,state.schools,null,a.school);fillSelect(f.grade,GRADES,null,String(a.gradeCreated));fillSelect(f.year,YEARS,null,a.schoolYearCreated);
+  fillSelect(f.school,state.schools,null,a.school);fillSelect(f.grade,GRADES,null,String(a.gradeCreated));fillSelect(f.year,YEARS,a.schoolYearCreated?null:'Choose year',a.schoolYearCreated||'');
   f.medium.value=a.medium;f.style.value=a.style;
   const editable=canEdit(a);
   ['title','artist','school','grade','year','medium','style'].forEach(k=>{f[k].disabled=!editable;f[k].removeAttribute('aria-invalid');});
@@ -620,8 +623,10 @@ function openEdit(id){
   if(!a.hasImage){prev.textContent='No stored image';return;}
   fullImage(a.id).then(img=>{
     if(token!==editToken)return;
-    prev.textContent='';prev.style.backgroundImage='url("'+img.dataUrl+'")';
-    const probe=new Image();probe.onload=()=>{if(token===editToken)$('#edit-preview-meta').textContent=`Original: ${probe.naturalWidth} × ${probe.naturalHeight} px · ${fmtBytes(img.bytes)} · click to enlarge`;};probe.src=img.dataUrl;
+    const src=showSrc(img);if(!src){prev.textContent='No browser-viewable preview for this HEIC file';return;}
+    prev.textContent='';prev.style.backgroundImage='url("'+src+'")';
+    if(img.browserSafe===false){$('#edit-preview-meta').textContent=heicNote(img)+' · click to enlarge';return;}
+    const probe=new Image();probe.onload=()=>{if(token===editToken)$('#edit-preview-meta').textContent=`Original: ${probe.naturalWidth} × ${probe.naturalHeight} px · ${fmtBytes(img.bytes)} · click to enlarge`;};probe.src=src;
   }).catch(e=>{if(token===editToken)prev.textContent=e.message;});
 }
 $$('[data-close-edit]').forEach(b=>b.addEventListener('click',()=>editDialog.close()));

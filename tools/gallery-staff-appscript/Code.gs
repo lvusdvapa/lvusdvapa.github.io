@@ -236,16 +236,34 @@ function imageBlob_(user, id) {
   return {rec, file};
 }
 
-/** Full-resolution original from Drive, returned as a data URL (never made public). */
+/** True for HEIC/HEIF (iPhone) files, which most browsers cannot display. */
+function isHeif_(bytes){
+  const b=Array.prototype.slice.call(bytes,0,12).map(n=>n&255);
+  if(b.length<12||String.fromCharCode(...b.slice(4,8))!=='ftyp')return false;
+  return ['heic','heix','hevc','hevx','heim','heis','mif1','msf1'].includes(String.fromCharCode(...b.slice(8,12)));
+}
+
+/**
+ * Full-resolution original from Drive, returned as a data URL (never made public).
+ * Legacy HEIC files can't be shown by most browsers: for those the response has
+ * browserSafe:false plus a Drive-converted preview (the public link if the artwork is
+ * already published, otherwise Drive's thumbnail). The original file is never changed.
+ */
 function getArtworkImage(id){
   const user=mustBeAllowed_(false);
-  const {file}=imageBlob_(user,id);
+  const {rec,file}=imageBlob_(user,id);
   const blob=file.getBlob();
   const bytes=blob.getBytes();
   if(!bytes.length)throw new Error('The stored image file is empty or damaged.');
   if(bytes.length>MAX_IMAGE_BYTES)throw new Error('Image too large to preview.');
+  if(isHeif_(bytes)){
+    let thumb='';
+    try{const t=file.getThumbnail();if(t&&t.getBytes().length)thumb='data:'+(t.getContentType()||'image/png')+';base64,'+Utilities.base64Encode(t.getBytes());}catch(e){}
+    return {id:String(id), mimeType:'image/heif', bytes:bytes.length, browserSafe:false, dataUrl:thumb,
+      publicUrl:rec.status==='Published'?'https://lh3.googleusercontent.com/d/'+encodeURIComponent(rec.driveFileId):''};
+  }
   const mime=mimeFromBytes_(bytes);
-  return {id:String(id), mimeType:mime, bytes:bytes.length, name:file.getName(),
+  return {id:String(id), mimeType:mime, bytes:bytes.length, browserSafe:true,
     dataUrl:'data:'+mime+';base64,'+Utilities.base64Encode(bytes)};
 }
 
@@ -428,3 +446,43 @@ function updateArtwork(id, values){
 
 /** Backwards-compatible name used by the previous Staff.html. */
 function reviseArtwork(id, values){ return updateArtwork(id, values); }
+
+/* ------------------------------------------------------------------ legacy import */
+
+/**
+ * Reviewer-only, idempotent: creates a Published private record for every row already in
+ * the public gallery sheet that the dashboard doesn't know about (e.g. rows typed in by
+ * hand before this app existed), so those artworks can be edited/unpublished here.
+ * Nothing on the public sheet or in Drive is changed. Run it from the Apps Script editor
+ * (Run ▸ importPublishedGalleryRows) or via google.script.run.
+ */
+function importPublishedGalleryRows(){
+  const reviewer=mustBeAllowed_(true);
+  return lock_(()=>{
+    const {sh,headers}=publicSheet_();
+    if(sh.getLastRow()<2)return {imported:0,skipped:0,missing:[]};
+    const known=new Set(rows_().map(x=>String(x.driveFileId)));
+    const col=h=>headers.indexOf(h);
+    const text=(v,max)=>String(v==null?'':v).trim().replace(/[<>\u0000-\u001F]/g,'').replace(/^[=+@\-]+/,'').slice(0,max);
+    const now=new Date().toISOString();
+    const out={imported:0,skipped:0,missing:[]};
+    sh.getRange(2,1,sh.getLastRow()-1,headers.length).getValues().forEach(r=>{
+      const fileId=text(r[col('file_id')],200);
+      if(!fileId)return;
+      if(known.has(fileId)){out.skipped++;return;}
+      try{DriveApp.getFileById(fileId);}catch(e){out.missing.push(fileId);return;}
+      const yearIdx=col('school_year_created');
+      const rec={id:Utilities.getUuid(),submittedAt:now,submittedBy:'gallery-import',
+        title:text(r[col('title')],120)||'Untitled',artist:text(r[col('artist')],90)||'Student',
+        school:text(r[col('school')],60),gradeCreated:text(r[col('grade')],2),
+        schoolYearCreated:yearIdx>=0?text(r[yearIdx],9):'',
+        medium:text(r[col('medium')],60),style:text(r[col('style')],60),
+        driveFileId:fileId,status:'Published',consentConfirmed:true,
+        reviewedBy:reviewer.email,reviewedAt:now,publishedAt:now,
+        reviewNote:'Imported from the existing public gallery sheet.'};
+      submissions_().appendRow(SUBMISSION_HEADERS.map(h=>rec[h]??''));
+      known.add(fileId);out.imported++;
+    });
+    return out;
+  });
+}

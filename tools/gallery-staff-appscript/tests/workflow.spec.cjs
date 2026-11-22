@@ -114,4 +114,34 @@ throws(() => pilot.call('reviewArtwork', p.id, 'approve', ''), /Reviewer permiss
 pilot.user = 'cbloom@lvusd.org'; ok(pilot.call('reviewArtwork', p.id, 'approve', '').status === 'Approved', 'pilot reviewer approves');
 pilot.user = 'x@lvusd.org'; throws(() => pilot.call('getStaffBootstrap'), /not authorized/);
 
+// --- legacy import of hand-entered public rows (HEIC originals) ---
+{
+  const lg = createEnv({ props: { PILOT_EMAIL_ONLY: 'YES', PILOT_ALLOWED_EMAILS: 'cbloom@lvusd.org,t@lvusd.org', PILOT_REVIEWER_EMAILS: 'cbloom@lvusd.org',
+    ELEMENTARY_TEACHERS_GROUP: '', SECONDARY_VAPA_GROUP: '', GALLERY_REVIEWERS_GROUP: '', GALLERY_ADMINS_GROUP: '' } });
+  const heic = [0,0,0,0x18,0x66,0x74,0x79,0x70,0x68,0x65,0x69,0x63,1,2,3];
+  ['legacy-a','legacy-b'].forEach(id => lg.files.set(id, { id, access: 'ANYONE_WITH_LINK', getId: () => id, getName: () => 'Flower_Real Name.jpeg', getSize: () => heic.length,
+    getBlob: () => ({ getBytes: () => heic, getContentType: () => 'image/heif' }), setSharing(a) { this.access = a; },
+    getThumbnail: () => ({ getBytes: () => [0x89,0x50,0x4e,0x47], getContentType: () => 'image/png' }) }));
+  lg.publicGallery.sheets.Sheet1.rows.push(['Anon','Student','Agoura High',10,'','Contemporary','Paint','legacy-a'],
+    ['=HYPERLINK("x")','Student','Agoura High',12,'','Contemporary','Oil Paint','legacy-b'], ['Gone','Student','Agoura High',12,'','X','Y','missing-file']);
+  lg.user = 't@lvusd.org'; throws(() => lg.call('importPublishedGalleryRows'), /Reviewer permission/);
+  lg.user = 'cbloom@lvusd.org';
+  const r1 = lg.call('importPublishedGalleryRows');
+  ok(r1.imported === 2 && r1.missing.length === 1 && r1.skipped === 0, 'imports existing public rows, reports missing files');
+  ok(lg.call('importPublishedGalleryRows').imported === 0, 'import is idempotent');
+  ok(lg.publicRows().length === 3, 'public sheet untouched by import');
+  const items = lg.call('getStaffBootstrap').items;
+  ok(items.length === 2 && items.every(i => i.status === 'Published'), 'imported as Published');
+  ok(!items.some(i => /^[=+@-]/.test(i.title)), 'formula text neutralized on import');
+  lg.user = 't@lvusd.org'; ok(lg.call('getStaffBootstrap').items.length === 0, 'teachers do not see imported rows');
+  lg.user = 'cbloom@lvusd.org';
+  const a1 = items.find(i => i.title === 'Anon');
+  const im = lg.call('getArtworkImage', a1.id);
+  ok(im.browserSafe === false && im.publicUrl === 'https://lh3.googleusercontent.com/d/legacy-a' && im.dataUrl.startsWith('data:image/png') && !('name' in im), 'HEIC preview fallback without exposing filename');
+  const un = lg.call('reviewArtwork', a1.id, 'unpublish', '');
+  ok(un.status === 'Approved' && lg.files.get('legacy-a').access === 'PRIVATE' && !lg.publicRows().some(r => r[7] === 'legacy-a'), 'imported artwork can be unpublished');
+  ok(lg.call('getArtworkImage', a1.id).publicUrl === '', 'no public URL once unpublished');
+  throws(() => lg.call('updateArtwork', a1.id, { title: 'Anon', artist: 'Student', school: 'Agoura High', gradeCreated: '10', schoolYearCreated: '', medium: 'Paint', style: 'C' }), /missing/);
+}
+
 console.log(`PASS: ${count} dashboard workflow assertions (upload, preview, edit, approve, publish, public feed, unpublish, bulk, archive, auth)`);
