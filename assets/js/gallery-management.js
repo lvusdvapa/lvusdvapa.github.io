@@ -163,7 +163,7 @@ uploadForm.addEventListener('submit',async event=>{
 
 const editDialog=$('#edit-dialog'), editForm=$('#edit-form');
 function openEdit(id){ const art=artworks.find(a=>a.id===id); if(!art)return; Object.entries(art).forEach(([key,value])=>{ if(editForm.elements[key])editForm.elements[key].value=value; }); const preview=$('#edit-preview');preview.className=`edit-preview art-thumb art-${art.art}`;preview.style.backgroundImage=art.thumb&&art.thumb.startsWith('data:image/jpeg;base64,')?`url("${art.thumb}")`:'';editDialog.showModal(); }
-$('[data-close-edit]').forEach(button=>button.addEventListener('click',()=>editDialog.close()));
+$$('[data-close-edit]').forEach(button=>button.addEventListener('click',()=>editDialog.close()));
 editForm.addEventListener('submit',event=>{ if(event.submitter?.value==='cancel')return; event.preventDefault(); if(!editForm.reportValidity())return; const data=Object.fromEntries(new FormData(editForm)); const art=artworks.find(a=>a.id===Number(data.id)); if(!art)return; ['title','artist','school','grade','year','medium','style','status'].forEach(key=>art[key]=data[key]); saveArtworks(); render(); editDialog.close(); toast('Artwork details saved.'); });
 
 render();
