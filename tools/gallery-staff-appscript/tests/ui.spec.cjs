@@ -58,6 +58,11 @@ async function confirm(w, note) { await until(() => $(w, '#confirm-dialog').open
   const drop2 = new w.Event('drop', { bubbles: true, cancelable: true }); drop2.dataTransfer = { files: [big] };
   $(w, '#drop-zone').dispatchEvent(drop2);
   ok(/under 8 MB/.test($(w, '#toast').textContent) && /2 images/.test($(w, '#upload-file-status').textContent), 'oversize rejected client-side');
+  $(w, '#upload-dialog').dispatchEvent(new w.Event('cancel', { cancelable: true }));
+  await until(() => $(w, '#confirm-dialog').open, 'discard confirmation');
+  ok($(w, '#upload-dialog').open, 'Escape does not silently discard selected files');
+  click(w, $(w, '[data-close-confirm]'));
+  ok($(w, '#upload-dialog').open && !$(w, '#continue-upload').disabled, 'files kept after declining discard');
   click(w, $(w, '#continue-upload'));
   ok(!$(w, '#upload-step-details').hidden, 'step 2 details');
   click(w, $(w, '#to-review'));
