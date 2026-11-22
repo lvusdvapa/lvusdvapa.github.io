@@ -3,110 +3,650 @@
 <head>
 <meta charset="utf-8">
 <base target="_top">
+<title>Art Gallery Management | LVUSD VAPA</title>
 <style>
-:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#26343d;background:#f5f7f7;font-size:16px}
-*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}
-header{background:#092d3a;color:#fff;padding:18px max(20px,calc((100% - 1160px)/2));display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-.brand{font:700 21px Georgia,serif}.brand small{display:block;font:500 11px system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;opacity:.78;margin-top:3px}
-.identity{text-align:right;font-size:13px;color:#d5e3e6}.identity strong{display:block;color:#fff}
-main{width:min(1160px,calc(100% - 36px));margin:40px auto 80px}
-h1,h2{font-family:Georgia,serif;color:#172c37}h1{font-size:clamp(30px,5vw,44px);margin:8px 0}h2{font-size:25px;margin:0}
-.kicker{font-size:12px;color:#00759c;font-weight:750;letter-spacing:.17em;text-transform:uppercase}
-.lede{color:#596d75;line-height:1.5}.notice{border-left:4px solid #cb9725;background:#fff8de;padding:13px 17px;border-radius:5px;margin:25px 0}
-.columns{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(350px,1.3fr);gap:22px;align-items:start}
-.panel{background:#fff;border:1px solid #d4dfe2;border-radius:12px;box-shadow:0 3px 12px rgba(7,45,58,.035);padding:25px}
-.panel h2{margin-bottom:16px}.label{display:block;font-weight:700;font-size:13px;margin-top:14px;margin-bottom:5px}
-input,select,textarea{width:100%;border:1px solid #acbbc1;border-radius:7px;padding:11px;min-height:43px;background:#fff;color:#1d323c}
-input:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #4ca5bf;outline-offset:2px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}.btn{border-radius:7px;padding:11px 15px;font-weight:700;border:1px solid #c0cbd0;background:#fff;color:#244354}
-.primary{background:#0074a0;color:#fff;border-color:#0074a0}.btn:disabled{opacity:.45;cursor:not-allowed}
-#image-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
-#image-preview img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px}
-.selection{border:2px dashed #aac4d0;border-radius:9px;padding:18px;background:#f7fbfc}
-.muted{color:#5b6e77;font-size:13px;line-height:1.45}.check{display:flex;align-items:start;gap:10px;margin-top:17px}.check input{width:20px;min-height:20px;flex:none}
-.submissions{display:grid;gap:10px}.art{border:1px solid #d6e0e4;border-radius:9px;padding:14px;display:grid;grid-template-columns:85px 1fr;gap:12px}
-.art img{width:85px;height:82px;object-fit:cover;border-radius:6px;background:#e5e8e8}
-.art h3{font-size:16px;margin:0 0 5px}.art p{font-size:13px;margin:3px 0;color:#586b75}.chip{font-size:12px;border-radius:30px;background:#dfedf4;color:#0d5b78;padding:4px 8px;display:inline-block;margin:5px 0}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.actions .btn{font-size:12px;padding:7px 9px}
-#status{min-height:23px;color:#075f80;font-weight:650;margin:13px 0}
-[hidden]{display:none!important}.empty{color:#65747d;padding:20px;text-align:center;border:1px dashed #c1cdd2;border-radius:9px}
-@media(max-width:800px){.columns{grid-template-columns:1fr}.row{grid-template-columns:1fr}.identity{text-align:left}}
+:root{--ink:#1f2831;--muted:#64707a;--navy:#123649;--blue:#006b98;--sky:#dceef5;--cream:#f5f0e3;--paper:#fff;--gold:#cc8c13;--green:#277a50;--red:#a53d3d;--line:#d8dee2;--shadow:0 12px 32px rgba(23,42,54,.11);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#f4f6f6;font-size:16px}
+*{box-sizing:border-box}body{margin:0;min-width:320px}button,input,select{font:inherit}button,a{touch-action:manipulation}a{color:inherit}.skip-link{position:fixed;left:1rem;top:-4rem;z-index:99;background:#fff;padding:.7rem 1rem}.skip-link:focus{top:1rem}.shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}.site-header{height:74px;padding:0 max(20px,calc((100% - 1180px)/2));display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff}.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border:1.5px solid rgba(255,255,255,.7);border-radius:50%;font:700 1.35rem Georgia,serif}.brand strong,.brand small{display:block}.brand strong{letter-spacing:.08em;font-size:.9rem}.brand small{opacity:.7;font-size:.74rem;margin-top:.1rem}.header-actions{display:flex;align-items:center;gap:1.25rem}.prototype-badge{font-size:.78rem;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);padding:.38rem .66rem;border-radius:999px}.text-link{font-weight:700;font-size:.88rem;text-underline-offset:4px}.avatar-button{border:0;background:#e6b93c;color:#27333b;border-radius:50%;width:38px;height:38px;font-weight:800}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding:58px 0 30px}.eyebrow{margin:0 0 .5rem;text-transform:uppercase;letter-spacing:.18em;font-size:.76rem;font-weight:800;color:var(--blue)}h1,h2{font-family:Georgia,"Times New Roman",serif;margin:0;color:#1e2931}h1{font-size:clamp(2.2rem,5vw,4rem);line-height:.98}h2{font-size:clamp(1.6rem,3vw,2.35rem)}.lede{font-size:1.08rem;color:#56616a;margin:1rem 0 0}.hero-actions{display:flex;gap:.75rem;flex-shrink:0}.button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:7px;padding:.72rem 1.05rem;font-weight:800;font-size:.9rem;text-decoration:none;cursor:pointer}.button-primary{background:var(--blue);border:1px solid var(--blue);color:#fff}.button-primary:hover{background:#005679}.button-secondary{background:#fff;border:1px solid #9aa6ad;color:#26343d}.notice{background:#eef7fa;border:1px solid #b7d7e4;border-radius:8px;padding:.85rem 1rem;display:flex;align-items:center;gap:.8rem}.notice-icon{display:grid;place-items:center;width:27px;height:27px;flex:0 0 auto;border-radius:50%;background:var(--blue);color:white;font:700 1rem Georgia}.notice strong{font-size:.9rem}.notice p{display:inline;margin:0 0 0 .5rem;color:#52636d;font-size:.88rem}.notice-close{margin-left:auto;border:0;background:transparent;color:#60717a;font-size:1.35rem;cursor:pointer}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-block:22px}.metrics article{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1rem;display:flex;align-items:center;gap:.9rem}.metric-icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:900}.metric-amber{background:#fff2cf;color:#9b6700}.metric-green{background:#dff4e9;color:#22663f}.metric-blue{background:#dbeff8;color:#0a668c}.metric-gray{background:#edf0f2;color:#66747c}.metrics strong,.metrics span{display:block}.metrics strong{font-size:1.45rem;line-height:1}.metrics article div span{font-size:.79rem;color:var(--muted);margin-top:.3rem}.workspace{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 18px rgba(31,48,59,.05);overflow:hidden}.section-heading{padding:1.45rem 1.5rem 1.15rem;display:flex;align-items:flex-end;justify-content:space-between}.section-heading h2{font-size:1.9rem}.view-toggle{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}.view-toggle button{width:38px;height:36px;border:0;background:#fff;color:#65727a;cursor:pointer;font-size:1.2rem}.view-toggle button+button{border-left:1px solid var(--line)}.view-toggle .active{background:var(--navy);color:#fff}.toolbar{display:grid;grid-template-columns:1.7fr repeat(4,1fr) auto;gap:.7rem;padding:1rem 1.5rem;background:#f7f9f9;border-block:1px solid var(--line);align-items:end}.toolbar label{font-size:.75rem;font-weight:800;color:#52606a}.toolbar label>span{display:block;margin-bottom:.35rem}.toolbar select,.toolbar input{width:100%;height:42px;border:1px solid #aeb8be;border-radius:6px;background:#fff;padding:0 .75rem;color:#283640}.toolbar select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#607079 50%),linear-gradient(135deg,#607079 50%,transparent 50%);background-position:calc(100% - 15px) 18px,calc(100% - 10px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:2rem}.search-field{position:relative}.search-field>span[aria-hidden]{position:absolute;left:.72rem;bottom:.72rem;font-size:1.1rem;color:#65757e;margin:0}.search-field input{padding-left:2.1rem}.clear-button{height:42px;border:0;background:transparent;color:var(--blue);font-weight:800;cursor:pointer}.selection-bar{margin:1rem 1.5rem 0;padding:.65rem .85rem;background:#eaf4f8;border-radius:7px;display:flex;align-items:center;gap:.7rem}.selection-bar[hidden]{display:none}.selection-bar strong{margin-right:auto;font-size:.86rem}.selection-bar button{border:1px solid #93b7c6;background:#fff;border-radius:5px;padding:.4rem .65rem;color:#18485c;font-weight:700;font-size:.8rem}.table-wrap{overflow:auto}.table-wrap table{border-collapse:collapse;width:100%;min-width:870px}.table-wrap th{padding:.75rem 1rem;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#66747d;background:#fbfcfc;border-bottom:1px solid var(--line)}.table-wrap td{padding:.85rem 1rem;border-bottom:1px solid #e7ebed;vertical-align:middle;font-size:.87rem}.table-wrap tr:hover td{background:#fcfdfd}.artwork-cell{display:flex;align-items:center;gap:.8rem;min-width:230px}.artwork-cell strong,.artwork-cell span{display:block}.artwork-cell span{font-size:.76rem;color:var(--muted);margin-top:.22rem}.art-thumb{display:block;flex:0 0 auto;width:58px;height:52px;border-radius:5px;background:#ccc center/cover;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}.art-1{background:radial-gradient(circle at 50% 50%,#ffd35c 0 7%,#e94d69 8% 20%,transparent 21%),conic-gradient(from 20deg,#f9913d,#ee496c,#ffb13b,#dd375d,#f9913d),#0f9cab}.art-2{background:radial-gradient(ellipse at 48% 44%,#e6a45c 0 19%,#1e263c 21% 31%,transparent 32%),linear-gradient(140deg,#21234b,#755486 55%,#c29368)}.art-3{background:repeating-linear-gradient(65deg,transparent 0 9px,rgba(245,246,220,.9) 10px 12px),linear-gradient(145deg,#34b7d3,#92c84b 58%,#1a6893)}.art-4{background:radial-gradient(circle at 25% 30%,#fff 0 4%,transparent 5%),radial-gradient(circle at 65% 48%,#f8d96c 0 7%,transparent 8%),linear-gradient(135deg,#243a6d,#d84c7a)}.art-5{background:linear-gradient(30deg,transparent 38%,#56312e 39% 47%,transparent 48%),radial-gradient(circle at 35% 45%,#e3bd88 0 18%,transparent 19%),#9dc5a7}.art-6{background:repeating-radial-gradient(circle at 50% 50%,#423c77 0 7px,#77bdc8 8px 14px,#efc654 15px 21px)}.art-7{background:conic-gradient(from 25deg,#87c9d2,#ef9a43,#cc4968,#674a87,#87c9d2)}.muted-cell{color:#5e6b73}.muted-cell span{display:block;font-size:.76rem;color:#7a858b;margin-top:.18rem}.status{display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .55rem;font-size:.73rem;font-weight:800}.status::before{content:"";width:6px;height:6px;border-radius:50%;margin-right:.35rem;background:currentColor}.status-pending{color:#8e6208;background:#fff2d6}.status-approved{color:#236743;background:#dff4e9}.status-published{color:#075f85;background:#def1f8}.status-draft{color:#5d6970;background:#edf0f2}.status-needs-changes{color:#923b3b;background:#f8e4e4}.row-actions{display:flex;justify-content:flex-end;gap:.35rem}.row-actions button{border:1px solid #b5c0c5;background:#fff;border-radius:5px;padding:.38rem .55rem;font-size:.78rem;font-weight:750;color:#34444d;cursor:pointer}.row-actions .approve-button{color:#1f6942;border-color:#8dc3a6}.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1.5rem}.art-card{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fff}.art-card .art-thumb{width:100%;height:170px;border-radius:0}.art-card-body{padding:1rem}.art-card-head{display:flex;justify-content:space-between;gap:1rem}.art-card h3{font:700 1.15rem Georgia;margin:0}.art-card p{font-size:.82rem;color:var(--muted);margin:.45rem 0 .9rem}.art-card-actions{display:flex;gap:.4rem}.art-card-actions button{border:1px solid #afbbc0;border-radius:5px;background:#fff;padding:.4rem .6rem;font-size:.8rem;font-weight:700}.empty-state{text-align:center;padding:4rem;color:var(--muted)}.collection-footer{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.5rem;color:var(--muted);font-size:.82rem;background:#fbfcfc}.text-button{background:none;border:0;color:var(--blue);font-weight:700;cursor:pointer}.workflow-panel{margin-block:32px 50px;background:var(--cream);border-radius:12px;padding:2rem;display:grid;grid-template-columns:.85fr 2fr;gap:2rem;align-items:center}.workflow-panel h2{font-size:1.8rem}.workflow-panel ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.workflow-panel li{display:flex;gap:.65rem}.workflow-panel li>span{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.8rem}.workflow-panel strong{font-size:.9rem}.workflow-panel p{font-size:.78rem;line-height:1.45;color:#5f6a71;margin:.3rem 0 0}.site-footer{background:var(--navy);color:rgba(255,255,255,.8);font-size:.8rem}.site-footer .shell{height:70px;display:flex;align-items:center;justify-content:space-between}.modal{width:min(760px,calc(100% - 32px));border:0;border-radius:12px;padding:0;box-shadow:var(--shadow);max-height:90vh}.modal::backdrop{background:rgba(11,30,41,.68)}.modal form{padding:1.5rem}.modal-header{display:flex;align-items:flex-start;justify-content:space-between}.modal-header h2{font-size:2rem}.icon-button{border:0;background:#edf1f2;border-radius:50%;width:36px;height:36px;font-size:1.35rem;cursor:pointer}.steps{display:flex;align-items:center;justify-content:center;margin:1.4rem 0}.steps span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#e2e7e9;color:#6b787f;font-weight:800;font-size:.78rem;position:relative}.steps span small{position:absolute;top:34px;font-size:.68rem;font-weight:700}.steps span.active{background:var(--blue);color:#fff}.steps i{width:75px;height:2px;background:#d9dfe1}.drop-zone{min-height:230px;border:2px dashed #93aeb9;border-radius:10px;background:#f7fbfc;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;margin-top:2.7rem;cursor:pointer;text-align:center}.drop-zone.dragover{background:#e8f5f9;border-color:var(--blue)}.drop-zone input{position:absolute;opacity:0;pointer-events:none}.upload-glyph{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:#dbeff6;color:var(--blue);font-size:1.8rem}.drop-zone>span:last-child{font-size:.8rem;color:var(--muted)}.privacy-note{font-size:.79rem;color:#5f6d75;background:#fff8df;border-left:3px solid var(--gold);padding:.7rem .8rem}.modal-actions{display:flex;justify-content:flex-end;gap:.65rem;margin-top:1.3rem}.button:disabled{opacity:.45;cursor:not-allowed}.file-summary{margin:2.7rem 0 1rem;border:1px solid var(--line);border-radius:8px;padding:.7rem;display:flex;align-items:center;gap:.75rem}.file-summary div{flex:1}.file-summary strong,.file-summary span{display:block}.file-summary span{font-size:.75rem;color:var(--muted);margin-top:.2rem}.file-summary button{border:0;background:transparent;color:var(--blue);font-weight:700}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}.form-grid label{font-size:.78rem;font-weight:800;color:#4f5d65}.form-grid input,.form-grid select{display:block;width:100%;height:42px;border:1px solid #aab5bb;border-radius:6px;margin-top:.35rem;padding:0 .7rem;background:#fff}.span-2{grid-column:span 2}.checkbox-label{display:flex;align-items:flex-start;gap:.6rem;font-weight:600!important;line-height:1.45}.checkbox-label input{width:18px;height:18px;flex:0 0 auto;margin:.1rem 0}.modal-wide{width:min(900px,calc(100% - 32px))}.edit-layout{display:grid;grid-template-columns:280px 1fr;gap:1.4rem;margin-top:1.4rem}.edit-preview{width:100%;height:100%;min-height:310px;border-radius:8px}.toast{position:fixed;right:24px;bottom:24px;background:#153b4d;color:#fff;border-radius:7px;padding:.8rem 1rem;font-weight:700;font-size:.85rem;box-shadow:var(--shadow);transform:translateY(130%);transition:.25s;z-index:100}.toast.show{transform:translateY(0)}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media (max-width:950px){.toolbar{grid-template-columns:2fr 1fr 1fr}.clear-button{justify-self:start}.metrics{grid-template-columns:repeat(2,1fr)}.workflow-panel{grid-template-columns:1fr}.card-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.shell{width:min(100% - 24px,1180px)}.site-header{padding-inline:12px}.prototype-badge,.header-actions .text-link{display:none}.hero{display:block;padding-top:38px}.hero-actions{margin-top:1.4rem}.hero-actions .button{flex:1}.notice p{display:block;margin:.2rem 0 0}.metrics{gap:8px}.metrics article{padding:.75rem}.toolbar{grid-template-columns:1fr 1fr;padding:1rem}.search-field{grid-column:span 2}.section-heading{padding-inline:1rem}.card-grid{grid-template-columns:1fr;padding:1rem}.workflow-panel{padding:1.25rem}.workflow-panel ol{grid-template-columns:1fr}.form-grid,.edit-layout{grid-template-columns:1fr}.span-2{grid-column:span 1}.edit-preview{height:190px;min-height:0}.site-footer .shell{display:block;padding-top:17px}.site-footer span{display:block;margin:.25rem 0}}
+/* ---- Apps Script integration additions (same design language as the original dashboard) ---- */
+[hidden]{display:none!important}
+.art-thumb{background:conic-gradient(from 25deg,#dfe8eb,#eef2f3,#dfe8eb);background-size:cover;background-position:center;background-repeat:no-repeat}
+.art-thumb.has-image{background-color:#e5e5df}
+.art-thumb.loading{animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+button.art-thumb{border:0;padding:0;cursor:zoom-in}
+.identity{display:flex;flex-direction:column;align-items:flex-end;font-size:.78rem;line-height:1.3}
+.identity strong{font-size:.84rem}.identity span{opacity:.75;text-transform:capitalize}
+.role-badge{font-size:.78rem;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);padding:.38rem .66rem;border-radius:999px;text-transform:capitalize}
+.status-archived{color:#5d6970;background:#edf0f2}
+.row-actions button.publish-button{color:#075f85;border-color:#8cc0d6}
+.row-actions button.danger,.art-card-actions button.danger{color:#923b3b;border-color:#d9a9a9}
+.row-actions button:disabled,.art-card-actions button:disabled,.selection-bar button:disabled{opacity:.45;cursor:not-allowed}
+.art-card .art-thumb{display:block;width:100%;height:190px;border-radius:0}
+.art-card-actions{flex-wrap:wrap}
+.selection-bar button.danger{color:#923b3b;border-color:#d9a9a9}
+.collection-footer .footer-actions{display:flex;gap:1rem}
+.load-state{padding:3rem 1.5rem;text-align:center;color:var(--muted)}
+.load-state.error{color:var(--red)}
+.edit-preview{background:#eef1f2 center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;position:relative;border:1px solid var(--line)}
+.edit-preview-wrap{display:flex;flex-direction:column;gap:.6rem}
+.edit-preview-meta{font-size:.75rem;color:var(--muted);line-height:1.45}
+.edit-meta{grid-column:span 2;background:#f7f9f9;border:1px solid var(--line);border-radius:8px;padding:.7rem .85rem;font-size:.8rem;color:#4f5d65;line-height:1.55}
+.edit-meta .review-note{color:#923b3b;font-weight:700}
+.edit-workflow{display:flex;flex-wrap:wrap;gap:.5rem;margin-right:auto}
+.form-grid textarea{display:block;width:100%;min-height:90px;border:1px solid #aab5bb;border-radius:6px;margin-top:.35rem;padding:.6rem .7rem;font:inherit}
+.form-grid input:disabled,.form-grid select:disabled{background:#f1f3f4;color:#6a767c}
+.button-danger{background:#fff;border:1px solid #c98f8f;color:#923b3b}
+.button-publish{background:#075f85;border:1px solid #075f85;color:#fff}
+.upload-review-list{list-style:none;margin:2.7rem 0 0;padding:0;display:grid;gap:.6rem;max-height:46vh;overflow:auto}
+.upload-review-list li{display:grid;grid-template-columns:64px 1fr auto;gap:.8rem;align-items:center;border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem}
+.upload-review-list img{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #cad4d9}
+.upload-review-list label{font-size:.72rem;font-weight:800;color:#4f5d65}
+.upload-review-list input{display:block;width:100%;height:38px;border:1px solid #aab5bb;border-radius:6px;margin-top:.25rem;padding:0 .6rem}
+.upload-review-list small{display:block;font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.upload-state{font-size:.75rem;font-weight:800;border-radius:999px;padding:.3rem .55rem;background:#edf0f2;color:#5d6970;white-space:nowrap}
+.upload-state.uploading{background:#fff2d6;color:#8e6208}.upload-state.done{background:#dff4e9;color:#236743}.upload-state.failed{background:#f8e4e4;color:#923b3b}
+.upload-summary{font-size:.82rem;color:#4f5d65;margin:.9rem 0 0;line-height:1.5}
+.lightbox{width:min(1200px,calc(100% - 32px));max-height:94vh;background:#0e1b22;color:#fff}
+.lightbox .lightbox-inner{padding:1rem 1rem 1.2rem}
+.lightbox .modal-header h2{color:#fff;font-size:1.4rem}
+.lightbox .lightbox-stage{display:flex;align-items:center;justify-content:center;min-height:50vh;margin-top:.8rem}
+.lightbox img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:4px;background:#1b2a33}
+.lightbox .lightbox-meta{font-size:.78rem;opacity:.75;margin-top:.6rem;text-align:center}
+.public-panel{background:#fff;border:1px solid var(--line);border-radius:12px;margin-block:32px;overflow:hidden}
+.public-panel .section-heading{align-items:center}
+.public-panel .public-note{padding:0 1.5rem 1rem;font-size:.85rem;color:var(--muted);margin:0}
+.public-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:0 1.5rem 1.5rem}
+.public-grid figure{margin:0;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.public-grid img{display:block;width:100%;height:180px;object-fit:cover;background:#e5e5df}
+.public-grid figcaption{padding:.7rem .8rem;font-size:.8rem;color:var(--muted)}
+.public-grid figcaption strong{display:block;font:700 1rem Georgia,serif;color:var(--ink);margin-bottom:.2rem}
+.confirm-text{font-size:.92rem;color:#4f5d65;line-height:1.5;margin:1.2rem 0 0}
+@media (max-width:950px){.public-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){.public-grid{grid-template-columns:1fr}.identity{display:none}.upload-review-list li{grid-template-columns:48px 1fr}.upload-review-list .upload-state{grid-column:span 2;justify-self:start}.edit-meta{grid-column:span 1}}
 </style>
 </head>
 <body>
-<header><div class="brand">Las Virgenes Unified<small>Visual &amp; Performing Arts · Gallery Management</small></div><div class="identity">Signed in with LVUSD Google<strong><?= staffEmail ?></strong><span id="role-label"><?= staffRole ?></span></div></header>
-<main>
-<p class="kicker">Staff Resources</p><h1>Student Art Gallery Management</h1>
-<p class="lede">Submit student work for review. Only authorized reviewers can approve and publish artwork to the public Visual Arts gallery.</p>
-<div class="notice"><strong>Publishing requires review.</strong> Uploaded images are held privately until a reviewer approves and publishes them. Verify district publication permissions before submission.</div>
-<div class="columns">
-<section class="panel"><h2>Submit artwork</h2><p class="muted">Upload individual or multiple JPG, PNG or WebP artwork photographs, up to 8 MB each. All files in a batch use the same metadata below.</p>
-<form id="upload-form">
-<div class="selection"><label class="label" for="files">Select artwork images</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><div id="image-preview" aria-label="Selected image previews"></div><p class="muted" id="selected-files">No files selected</p></div>
-<label class="label" for="title">Artwork title</label><input id="title" required maxlength="120" placeholder="Untitled is okay">
-<label class="label" for="artist">Artist credit</label><input id="artist" required maxlength="90" placeholder="Student or approved display credit" value="Student">
-<div class="row"><div><label class="label" for="school">School</label><select id="school" required><option value="">Select school</option></select></div><div><label class="label" for="grade">Grade Created</label><select id="grade" required><option value="">Choose grade</option><option>K</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div></div>
-<div class="row"><div><label class="label" for="year">School Year Created</label><select id="year" required><option value="">Choose year</option><option>2026–27</option><option>2025–26</option><option>2024–25</option><option>2023–24</option></select></div><div><label class="label" for="medium">Medium</label><input id="medium" required maxlength="60" placeholder="Oil paint, sculpture..."></div></div>
-<label class="label" for="style">Style</label><input id="style" required maxlength="60" value="Not specified">
-<label class="check"><input id="consent" type="checkbox" required><span class="muted">I have confirmed this artwork is cleared for district publication and the displayed artist credit complies with district privacy guidance.</span></label>
-<div id="status" role="status" aria-live="polite"></div><button class="btn primary" id="submit-button" type="submit">Submit to review queue</button><button class="btn" type="reset">Clear</button>
-</form></section>
-<section class="panel"><h2>Review queue</h2><p class="muted" id="queue-message">Loading submissions…</p><div class="submissions" id="submissions"></div></section>
-</div></main>
+  <a class="skip-link" href="#main" target="_self">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="https://lvusdvapa.github.io/index.html?page=staffresources#staffresources" aria-label="LVUSD VAPA staff resources">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span><strong>Las Virgenes Unified</strong><small>Visual &amp; Performing Arts · Staff</small></span>
+    </a>
+    <nav class="header-actions" aria-label="Utility navigation">
+      <span class="role-badge" id="role-badge"><?= staffRole ?></span>
+      <a class="text-link" href="https://lvusdvapa.github.io/index.html?page=visual#visual" target="_blank" rel="noopener">View public gallery</a>
+      <span class="identity"><strong id="staff-email"><?= staffEmail ?></strong><span>Signed in with LVUSD Google</span></span>
+      <span class="avatar-button" id="avatar" aria-hidden="true"></span>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Visual Arts · Staff workspace</p>
+        <h1 id="page-title">Art Gallery Management</h1>
+        <p class="lede">Upload student work, complete gallery details, and review what is ready to publish.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-secondary" href="#public-gallery" target="_self" id="open-public">Open public gallery</a>
+        <button class="button button-primary" type="button" data-open-upload>Upload artwork</button>
+      </div>
+    </section>
+
+    <section class="shell notice" aria-label="Privacy notice">
+      <span class="notice-icon" aria-hidden="true">i</span>
+      <div><strong>Private until published</strong><p>Uploads are stored in a restricted Google Drive folder. Only authorized reviewers can approve and publish artwork to the public gallery.</p></div>
+      <button class="notice-close" type="button" aria-label="Dismiss notice">×</button>
+    </section>
+
+    <section class="shell metrics" aria-label="Gallery overview">
+      <article><span class="metric-icon metric-amber" aria-hidden="true">◷</span><div><strong id="pending-count">–</strong><span>Awaiting review</span></div></article>
+      <article><span class="metric-icon metric-green" aria-hidden="true">✓</span><div><strong id="approved-count">–</strong><span>Approved</span></div></article>
+      <article><span class="metric-icon metric-blue" aria-hidden="true">●</span><div><strong id="published-count">–</strong><span>Published</span></div></article>
+      <article><span class="metric-icon metric-gray" aria-hidden="true">◇</span><div><strong id="changes-count">–</strong><span>Needs changes</span></div></article>
+    </section>
+
+    <section class="shell workspace" aria-labelledby="collection-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Collection</p><h2 id="collection-title">Student artwork</h2></div>
+        <div class="view-toggle" role="group" aria-label="Display options">
+          <button class="active" type="button" data-view="table" aria-pressed="true" title="Table view">☷</button>
+          <button type="button" data-view="grid" aria-pressed="false" title="Grid view">▦</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-field"><span class="sr-only">Search artworks</span><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search title or artist credit"></label>
+        <label><span>School</span><select id="school-filter"><option value="">All schools</option></select></label>
+        <label><span>Grade Created</span><select id="grade-filter"><option value="">All grades</option></select></label>
+        <label><span>School Year Created</span><select id="year-filter"><option value="">All years</option></select></label>
+        <label><span>Status</span><select id="status-filter"><option value="">All active</option><option>Pending</option><option>Approved</option><option>Published</option><option>Needs Changes</option><option>Archived</option></select></label>
+        <button id="clear-filters" class="clear-button" type="button">Clear</button>
+      </div>
+
+      <div class="selection-bar" id="selection-bar" hidden>
+        <strong><span id="selected-count">0</span> selected</strong>
+        <button type="button" data-bulk="approve">Approve</button>
+        <button type="button" data-bulk="changes">Request changes</button>
+        <button type="button" data-bulk="archive" class="danger">Archive</button>
+      </div>
+
+      <div class="load-state" id="load-state" role="status">Loading artwork from Google Sheets…</div>
+      <div class="table-wrap" id="table-view" hidden>
+        <table>
+          <thead><tr><th class="select-col"><input id="select-all" type="checkbox" aria-label="Select all visible artworks"></th><th>Artwork</th><th>School / grade</th><th>Created</th><th>Medium / style</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
+          <tbody id="artwork-rows"></tbody>
+        </table>
+      </div>
+      <div class="card-grid" id="grid-view" hidden></div>
+      <p class="empty-state" id="empty-state" hidden>No artworks match these filters.</p>
+      <div class="collection-footer"><span id="result-count">0 artworks</span><div class="footer-actions"><span id="last-sync"></span><button class="text-button" id="refresh-data" type="button">Refresh</button></div></div>
+    </section>
+
+    <section class="shell public-panel" id="public-gallery" aria-labelledby="public-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Public gallery feed</p><h2 id="public-title">Published artwork</h2></div>
+        <button class="button button-secondary" type="button" id="load-public">Load published feed</button>
+      </div>
+      <p class="public-note">Shows exactly what the configured public gallery sheet contains, with images loaded from the same public Google Drive links the Visual Arts page uses.</p>
+      <div class="load-state" id="public-state" hidden></div>
+      <div class="public-grid" id="public-grid"></div>
+    </section>
+
+    <section class="shell workflow-panel" aria-labelledby="workflow-title">
+      <div><p class="eyebrow">How publishing works</p><h2 id="workflow-title">A clear path from classroom to gallery</h2></div>
+      <ol>
+        <li><span>1</span><div><strong>Upload &amp; describe</strong><p>Staff upload one or many images and add artwork details.</p></div></li>
+        <li><span>2</span><div><strong>Review</strong><p>An authorized reviewer checks quality, consent, and credit.</p></div></li>
+        <li><span>3</span><div><strong>Publish</strong><p>Approved records become eligible for the public gallery feed.</p></div></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell"><span>LVUSD Visual &amp; Performing Arts</span><span>Staff workspace · LVUSD Google Workspace</span></div></footer>
+
+  <!-- Upload: 1 Files → 2 Details → 3 Review -->
+  <dialog id="upload-dialog" class="modal">
+    <form id="upload-form" novalidate>
+      <div class="modal-header"><div><p class="eyebrow">New submission</p><h2>Upload artwork</h2></div><button class="icon-button" type="button" data-close-upload aria-label="Close">×</button></div>
+      <div class="steps" aria-label="Upload progress"><span class="active">1 <small>Files</small></span><i></i><span>2 <small>Details</small></span><i></i><span>3 <small>Review</small></span></div>
+      <div id="upload-step-files">
+        <div class="drop-zone" id="drop-zone"><input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><span class="upload-glyph" aria-hidden="true">↑</span><strong>Drag artwork images here</strong><button class="button button-secondary" type="button" id="choose-files">Choose images</button><span>JPG, PNG, or WebP · up to 8 MB each</span><p id="upload-file-status" role="status" aria-live="polite">No files selected</p><div id="upload-image-previews" class="upload-image-previews" aria-label="Selected artwork thumbnails"></div></div>
+        <p class="privacy-note"><strong>Student privacy:</strong> use artwork-only images. Avoid student faces, full legal names, and other identifying information.</p>
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-upload>Cancel</button><button class="button button-primary" id="continue-upload" type="button" disabled>Continue</button></div>
+      </div>
+      <div id="upload-step-details" hidden>
+        <div class="file-summary"><span class="art-thumb" id="file-summary-thumb" aria-hidden="true"></span><div><strong id="file-summary-name">Artwork image</strong><span id="file-summary-size">Ready for details</span></div><button type="button" id="change-files">Change</button></div>
+        <div class="form-grid">
+          <label class="span-2">Artwork title<input name="title" required maxlength="120" placeholder="Untitled is okay"></label>
+          <label>Artist credit<input name="artist" required maxlength="90" placeholder="First name + last initial, or Anonymous"></label>
+          <label>School<select name="school" required><option value="">Choose school</option></select></label>
+          <label>Grade Created<select name="grade" required></select></label>
+          <label>School Year Created<select name="year" required></select></label>
+          <label>Medium<input name="medium" required maxlength="60" placeholder="e.g., Oil paint"></label>
+          <label>Style<input name="style" required maxlength="60" placeholder="e.g., Observational" value="Not specified"></label>
+          <label class="span-2 checkbox-label"><input name="consent" type="checkbox" required><span>I confirm this artwork is cleared for district publication and the artist credit follows district privacy guidance.</span></label>
+        </div>
+        <div class="modal-actions"><button class="button button-secondary" type="button" id="back-upload">Back</button><button class="button button-secondary" type="button" data-close-upload>Cancel</button><button class="button button-primary" type="button" id="to-review">Review submission</button></div>
+      </div>
+      <div id="upload-step-review" hidden>
+        <ul class="upload-review-list" id="upload-review-list"></ul>
+        <p class="upload-summary" id="upload-summary"></p>
+        <div class="modal-actions"><button class="button button-secondary" type="button" id="back-details">Back</button><button class="button button-secondary" type="button" data-close-upload id="cancel-review">Cancel</button><button class="button button-primary" type="submit" id="submit-upload">Add to review queue</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Artwork record / editing panel -->
+  <dialog id="edit-dialog" class="modal modal-wide">
+    <form id="edit-form" novalidate>
+      <input type="hidden" name="id">
+      <div class="modal-header"><div><p class="eyebrow">Artwork record</p><h2 id="edit-heading">Edit details</h2></div><button class="icon-button" type="button" data-close-edit aria-label="Close">×</button></div>
+      <div class="edit-layout">
+        <div class="edit-preview-wrap">
+          <button class="edit-preview" id="edit-preview" type="button" aria-label="Open full-resolution image">Loading full-resolution image…</button>
+          <div class="edit-preview-meta" id="edit-preview-meta"></div>
+        </div>
+        <div class="form-grid">
+          <label class="span-2">Artwork title<input name="title" required maxlength="120"></label>
+          <label>Artist credit<input name="artist" required maxlength="90"></label>
+          <label>School<select name="school" required></select></label>
+          <label>Grade Created<select name="grade" required></select></label>
+          <label>School Year Created<select name="year" required></select></label>
+          <label>Medium<input name="medium" required maxlength="60"></label>
+          <label>Style<input name="style" required maxlength="60"></label>
+          <div class="edit-meta" id="edit-meta"></div>
+        </div>
+      </div>
+      <div class="modal-actions"><div class="edit-workflow" id="edit-workflow"></div><button class="button button-secondary" type="button" data-close-edit>Cancel</button><button class="button button-primary" type="submit" id="save-edit">Save changes</button></div>
+    </form>
+  </dialog>
+
+  <!-- Confirmation / review note -->
+  <dialog id="confirm-dialog" class="modal">
+    <form id="confirm-form" novalidate>
+      <div class="modal-header"><div><p class="eyebrow" id="confirm-eyebrow">Confirm</p><h2 id="confirm-title">Are you sure?</h2></div><button class="icon-button" type="button" data-close-confirm aria-label="Close">×</button></div>
+      <p class="confirm-text" id="confirm-text"></p>
+      <div class="form-grid" id="confirm-note-wrap" hidden><label class="span-2">Note to the teacher<textarea name="note" maxlength="500" placeholder="What should be changed?"></textarea></label></div>
+      <div class="modal-actions"><button class="button button-secondary" type="button" data-close-confirm>Cancel</button><button class="button button-primary" type="submit" id="confirm-ok">Confirm</button></div>
+    </form>
+  </dialog>
+
+  <!-- Full-resolution viewer -->
+  <dialog id="lightbox" class="modal lightbox">
+    <div class="lightbox-inner">
+      <div class="modal-header"><div><p class="eyebrow" style="color:#9fd3e6">Full-resolution original · Google Drive</p><h2 id="lightbox-title">Artwork</h2></div><button class="icon-button" type="button" id="lightbox-close" aria-label="Close">×</button></div>
+      <div class="lightbox-stage"><img id="lightbox-img" alt=""><p id="lightbox-status">Loading…</p></div>
+      <p class="lightbox-meta" id="lightbox-meta"></p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
 (function(){
 'use strict';
-const $=id=>document.getElementById(id),state={role:null,records:[],loading:false,files:[]};
-const schools=['Agoura High','Calabasas High','Lindero Canyon Middle School','A.C. Stelle Middle School','A.E. Wright Middle School','Bay Laurel Elementary','Buttercup Preschool','Chaparral Elementary','Lupin Hill Elementary','Mariposa Elementary','Round Meadow Elementary','Sumac Elementary','White Oak Elementary','Willow Elementary','Yerba Buena Elementary'];
-for(const school of schools){const o=document.createElement('option');o.textContent=school;o.value=school;$('school').append(o);}
-function msg(text){$('status').textContent=text;}
-function call(method,...args){return new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(new Error(e.message||String(e))))[method](...args));}
-function img(file){return new Promise((res,rej)=>{const reader=new FileReader();reader.onload=()=>res(String(reader.result).split(',')[1]);reader.onerror=()=>rej(new Error('File read failed'));reader.readAsDataURL(file);});}
-function draw(){
- $('submissions').replaceChildren();$('queue-message').textContent=state.records.length+' submission(s)';
- if(!state.records.length){const x=document.createElement('p');x.className='empty';x.textContent='There are no submissions yet.';$('submissions').append(x);return;}
- for(const art of state.records){
-  const row=document.createElement('article');row.className='art';
-  const photo=document.createElement('img');photo.alt='Artwork preview';photo.loading='lazy';
-  photo.addEventListener('error',()=>{photo.alt='Preview unavailable';});
-  const copy=document.createElement('div');
-  const title=document.createElement('h3');title.textContent=art.title;copy.append(title);
-  const details=document.createElement('p');details.textContent=[art.artist,art.school,'Grade '+art.gradeCreated,art.schoolYearCreated,art.medium].join(' · ');copy.append(details);
-  const chip=document.createElement('span');chip.className='chip';chip.textContent=art.status;copy.append(chip);
-  if(art.reviewNote){const note=document.createElement('p');note.textContent='Reviewer: '+art.reviewNote;copy.append(note);}
-  const actions=document.createElement('div');actions.className='actions';
-  const previewButton=document.createElement('button');previewButton.type='button';previewButton.className='btn';previewButton.textContent='View image';previewButton.onclick=async()=>{previewButton.disabled=true;try{photo.src=await call('getArtworkPreview',art.id);}catch(e){msg(e.message);}finally{previewButton.disabled=false;}};
-  actions.append(previewButton);
-  if(state.role==='reviewer'||state.role==='admin'){
-   const options=art.status==='Pending'?[['approve','Approve'],['changes','Request changes']]:art.status==='Approved'?[['publish','Publish'],['changes','Request changes']]:art.status==='Published'?[['unpublish','Unpublish']]:[];
-   for(const [decision,label] of options){const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=label;btn.onclick=async()=>{
-      let note='';if(decision==='changes'){note=prompt('What should the teacher change?')||'';if(!note.trim())return;}
-      if(['publish','unpublish'].includes(decision)&&!confirm(label+' this artwork?'))return;
-      btn.disabled=true;try{await call('reviewArtwork',art.id,decision,note);msg('Artwork updated.');await reload();}catch(e){msg(e.message);}finally{btn.disabled=false;}
-   };actions.append(btn);}
-  }
-  copy.append(actions);row.append(photo,copy);$('submissions').append(row);
- }
+const $=(s,scope=document)=>scope.querySelector(s);
+const $$=(s,scope=document)=>[...scope.querySelectorAll(s)];
+const esc=v=>String(v==null?'':v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const statusClass=s=>String(s||'').toLowerCase().replace(/\s+/g,'-');
+const GRADES=['K','1','2','3','4','5','6','7','8','9','10','11','12'];
+const YEARS=(()=>{const now=new Date(),start=now.getMonth()>=6?now.getFullYear():now.getFullYear()-1,out=[];for(let y=start;y>=start-6;y--)out.push(y+'–'+String(y+1).slice(-2));return out;})();
+const ALLOWED=['image/jpeg','image/png','image/webp'];
+
+const state={email:'',role:'',canReview:false,items:[],schools:[],maxBytes:8*1024*1024,selected:new Set(),view:'table',
+  thumbs:new Map(),thumbRequested:new Set(),full:new Map(),loaded:false,busy:false};
+
+/* ---------- server bridge ---------- */
+function call(method,...args){
+  return new Promise((resolve,reject)=>{
+    if(!(window.google&&google.script&&google.script.run)){reject(new Error('Google Apps Script is not available.'));return;}
+    google.script.run.withSuccessHandler(resolve).withFailureHandler(e=>reject(new Error((e&&e.message)||String(e))))[method](...args);
+  });
 }
-async function reload(){const data=await call('getStaffBootstrap');state.role=data.role;state.records=data.items;$('role-label').textContent=data.role;draw();}
-$('files').addEventListener('change',()=>{const files=Array.from($('files').files||[]);state.files=files;$('image-preview').replaceChildren();$('selected-files').textContent=files.length+' files selected';for(const f of files.slice(0,8)){const image=document.createElement('img'),url=URL.createObjectURL(f);image.src=url;image.alt=f.name;image.onload=()=>URL.revokeObjectURL(url);$('image-preview').append(image);}});
-$('upload-form').addEventListener('reset',()=>{state.files=[];$('image-preview').replaceChildren();$('selected-files').textContent='No files selected';msg('');});
-$('upload-form').addEventListener('submit',async event=>{
- event.preventDefault();if(state.loading)return;
- const files=state.files;if(!files.length){msg('Choose at least one image.');return;}
- if(files.some(f=>f.size>8*1024*1024||!['image/jpeg','image/png','image/webp'].includes(f.type))){msg('Only JPG, PNG, or WebP images under 8 MB can be submitted.');return;}
- state.loading=true;$('submit-button').disabled=true;
- try{
-  for(let i=0;i<files.length;i++){
-   msg('Uploading artwork '+(i+1)+' of '+files.length+'…');
-   const req={base64:await img(files[i]),title:$('title').value,artist:$('artist').value,school:$('school').value,gradeCreated:$('grade').value,schoolYearCreated:$('year').value,medium:$('medium').value,style:$('style').value,consentConfirmed:$('consent').checked};
-   await call('submitArtwork',req);
+function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),3600);}
+
+/* ---------- static options ---------- */
+function fillSelect(select,values,placeholder,current){
+  select.replaceChildren();
+  if(placeholder!=null){const o=document.createElement('option');o.value='';o.textContent=placeholder;select.append(o);}
+  const list=[...values];if(current&&!list.includes(current))list.push(current);
+  list.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;select.append(o);});
+  if(current!=null)select.value=current;
+}
+function initForms(){
+  const up=$('#upload-form').elements,ed=$('#edit-form').elements;
+  fillSelect(up.school,state.schools,'Choose school');fillSelect(up.grade,GRADES,'Choose grade');fillSelect(up.year,YEARS,'Choose year');
+  fillSelect(ed.school,state.schools,null);fillSelect(ed.grade,GRADES,null);fillSelect(ed.year,YEARS,null);
+}
+
+/* ---------- data ---------- */
+async function load(){
+  $('#load-state').hidden=false;$('#load-state').classList.remove('error');
+  if(!state.loaded)$('#load-state').textContent='Loading artwork from Google Sheets…';
+  try{
+    const data=await call('getStaffBootstrap');
+    state.email=data.email;state.role=data.role;state.canReview=!!data.canReview;state.items=data.items||[];
+    state.maxBytes=data.maxImageBytes||state.maxBytes;
+    if(!state.schools.length){state.schools=data.schools||[];initForms();}
+    $('#role-badge').textContent=data.role;$('#staff-email').textContent=data.email;
+    $('#avatar').textContent=data.email.slice(0,2).toUpperCase();
+    document.body.classList.toggle('is-reviewer',state.canReview);
+    const ids=new Set(state.items.map(a=>a.id));[...state.selected].forEach(id=>{if(!ids.has(id))state.selected.delete(id);});
+    state.loaded=true;$('#load-state').hidden=true;
+    $('#last-sync').textContent='Synced '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+    render();
+  }catch(e){
+    $('#load-state').hidden=false;$('#load-state').classList.add('error');$('#load-state').textContent=e.message;
+    $('#table-view').hidden=true;$('#grid-view').hidden=true;
   }
-  $('upload-form').reset();msg(files.length+' artwork(s) added to the private review queue.');await reload();
- }catch(e){msg('Upload stopped: '+e.message+' (earlier images may have been received).');}
- finally{state.loading=false;$('submit-button').disabled=false;}
+}
+function byId(id){return state.items.find(a=>a.id===id);}
+function replaceItem(item){const i=state.items.findIndex(a=>a.id===item.id);if(i>=0)state.items[i]=item;else state.items.unshift(item);}
+
+/* ---------- filtering & rendering ---------- */
+function filtered(){
+  const q=$('#search').value.trim().toLowerCase(),sc=$('#school-filter').value,gr=$('#grade-filter').value,yr=$('#year-filter').value,st=$('#status-filter').value;
+  return state.items.filter(a=>(!q||(a.title+' '+a.artist).toLowerCase().includes(q))
+    &&(!sc||a.school===sc)&&(!gr||String(a.gradeCreated)===gr)&&(!yr||a.schoolYearCreated===yr)
+    &&(st?a.status===st:a.status!=='Archived'))
+   .sort((a,b)=>String(b.submittedAt).localeCompare(String(a.submittedAt)));
+}
+function fillFilter(sel,key,sorter){
+  const select=$(sel),current=select.value,first=select.options[0].textContent;
+  const values=[...new Set(state.items.map(a=>String(a[key])).filter(Boolean))].sort(sorter||((a,b)=>a.localeCompare(b,undefined,{numeric:true})));
+  fillSelect(select,values,first,null);select.value=values.includes(current)?current:'';
+}
+const gradeSort=(a,b)=>(a==='K'?-1:+a)-(b==='K'?-1:+b);
+
+function actionButtons(a,cls){
+  const out=[];
+  if(state.canReview){
+    if(a.status==='Pending')out.push(`<button class="approve-button" data-act="approve" data-id="${esc(a.id)}">Approve</button>`);
+    if(a.status==='Approved')out.push(`<button class="publish-button" data-act="publish" data-id="${esc(a.id)}">Publish</button>`);
+    if(a.status==='Published')out.push(`<button class="danger" data-act="unpublish" data-id="${esc(a.id)}">Unpublish</button>`);
+    if(a.status==='Archived')out.push(`<button data-act="restore" data-id="${esc(a.id)}">Restore</button>`);
+  }
+  const editable=state.canReview?a.status!=='Archived':['Pending','Needs Changes'].includes(a.status);
+  out.push(`<button data-edit="${esc(a.id)}">${editable?(cls==='card'?'Edit details':'Edit'):'View'}</button>`);
+  return out.join('');
+}
+function thumb(a,extra){
+  return `<button type="button" class="art-thumb${extra?' '+extra:''}" data-thumb="${esc(a.id)}" data-view-image="${esc(a.id)}" aria-label="View full-resolution image of ${esc(a.title)}"></button>`;
+}
+function render(){
+  fillFilter('#school-filter','school');fillFilter('#grade-filter','gradeCreated',gradeSort);fillFilter('#year-filter','schoolYearCreated',(a,b)=>b.localeCompare(a));
+  const visible=filtered();
+  $$('.select-col').forEach(el=>el.hidden=!state.canReview);
+  $('#artwork-rows').innerHTML=visible.map(a=>`<tr>
+    ${state.canReview?`<td><input type="checkbox" data-select="${esc(a.id)}" aria-label="Select ${esc(a.title)}" ${state.selected.has(a.id)?'checked':''}></td>`:''}
+    <td><div class="artwork-cell">${thumb(a)}<div><strong>${esc(a.title)}</strong><span>${esc(a.artist)}</span></div></div></td>
+    <td class="muted-cell">${esc(a.school)}<span>Grade ${esc(a.gradeCreated)}</span></td>
+    <td class="muted-cell">${esc(a.schoolYearCreated)}<span>${esc(fmtDate(a.submittedAt))}</span></td>
+    <td class="muted-cell">${esc(a.medium)}<span>${esc(a.style)}</span></td>
+    <td><span class="status status-${statusClass(a.status)}">${esc(a.status)}</span></td>
+    <td><div class="row-actions">${actionButtons(a,'row')}</div></td></tr>`).join('');
+  $('#grid-view').innerHTML=visible.map(a=>`<article class="art-card">${thumb(a)}<div class="art-card-body"><div class="art-card-head"><h3>${esc(a.title)}</h3><span class="status status-${statusClass(a.status)}">${esc(a.status)}</span></div><p>${esc(a.artist)} · ${esc(a.school)} · Grade ${esc(a.gradeCreated)} · ${esc(a.schoolYearCreated)}</p><div class="art-card-actions">${actionButtons(a,'card')}</div></div></article>`).join('');
+  $('#result-count').textContent=`${visible.length} artwork${visible.length===1?'':'s'}`;
+  $('#empty-state').textContent=state.items.length?'No artworks match these filters.':'No artwork has been submitted yet. Use “Upload artwork” to add the first piece.';
+  $('#empty-state').hidden=visible.length>0;
+  $('#table-view').hidden=state.view!=='table'||!visible.length;$('#grid-view').hidden=state.view!=='grid'||!visible.length;
+  const c={Pending:0,Approved:0,Published:0,'Needs Changes':0};state.items.forEach(a=>{if(a.status in c)c[a.status]++;});
+  $('#pending-count').textContent=c.Pending;$('#approved-count').textContent=c.Approved;$('#published-count').textContent=c.Published;$('#changes-count').textContent=c['Needs Changes'];
+  updateSelection();applyThumbs();requestThumbs(visible.map(a=>a.id));
+}
+function fmtDate(iso){const d=new Date(iso);return isNaN(d)?'':'Submitted '+d.toLocaleDateString([], {month:'short',day:'numeric',year:'numeric'});}
+function updateSelection(){
+  $('#selected-count').textContent=state.selected.size;$('#selection-bar').hidden=!state.canReview||state.selected.size===0;
+  const visible=filtered(),all=$('#select-all');
+  all.checked=visible.length>0&&visible.every(a=>state.selected.has(a.id));
+  all.indeterminate=visible.some(a=>state.selected.has(a.id))&&!all.checked;
+}
+
+/* ---------- Drive thumbnails (small) & full-resolution originals ---------- */
+function applyThumbs(){
+  $$('[data-thumb]').forEach(el=>{
+    const id=el.dataset.thumb,url=state.thumbs.get(id);
+    if(url){el.style.backgroundImage='url("'+url+'")';el.classList.add('has-image');el.classList.remove('loading');}
+    else if(state.thumbRequested.has(id)&&!state.thumbs.has(id))el.classList.add('loading');
+    else if(state.thumbs.has(id))el.classList.remove('loading');
+  });
+}
+let thumbQueue=Promise.resolve();
+function requestThumbs(ids){
+  const need=ids.filter(id=>!state.thumbRequested.has(id)&&byId(id)?.hasImage);
+  if(!need.length)return;
+  need.forEach(id=>state.thumbRequested.add(id));applyThumbs();
+  for(let i=0;i<need.length;i+=20){
+    const chunk=need.slice(i,i+20);
+    thumbQueue=thumbQueue.then(()=>call('getArtworkThumbnails',chunk)).then(map=>{
+      chunk.forEach(id=>{const url=map&&map[id];if(url)state.thumbs.set(id,url);else if(state.full.has(id))state.thumbs.set(id,state.full.get(id).dataUrl);else state.thumbs.set(id,'');});
+      applyThumbs();
+      // Thumbnails Drive could not generate yet: fall back to the original image.
+      chunk.filter(id=>!state.thumbs.get(id)).forEach(id=>fullImage(id).then(img=>{state.thumbs.set(id,img.dataUrl);applyThumbs();}).catch(()=>{}));
+    }).catch(()=>{chunk.forEach(id=>state.thumbRequested.delete(id));applyThumbs();});
+  }
+}
+function fullImage(id){
+  if(state.full.has(id))return Promise.resolve(state.full.get(id));
+  if(!fullImage.pending)fullImage.pending=new Map();
+  if(fullImage.pending.has(id))return fullImage.pending.get(id);
+  const p=call('getArtworkImage',id).then(img=>{
+    state.full.set(id,img);fullImage.pending.delete(id);
+    if(state.full.size>12){const first=state.full.keys().next().value;state.full.delete(first);}
+    return img;
+  },e=>{fullImage.pending.delete(id);throw e;});
+  fullImage.pending.set(id,p);return p;
+}
+function fmtBytes(n){return n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';}
+
+async function openLightbox(id){
+  const a=byId(id);if(!a)return;
+  const box=$('#lightbox'),img=$('#lightbox-img');
+  $('#lightbox-title').textContent=a.title;img.removeAttribute('src');img.alt='';img.hidden=true;
+  $('#lightbox-status').hidden=false;$('#lightbox-status').textContent='Loading full-resolution image from Google Drive…';$('#lightbox-meta').textContent='';
+  if(!box.open)box.showModal();
+  try{
+    const full=await fullImage(id);
+    img.onload=()=>{$('#lightbox-meta').textContent=`${img.naturalWidth} × ${img.naturalHeight} px · ${fmtBytes(full.bytes)} · ${full.mimeType.replace('image/','').toUpperCase()}`;};
+    img.src=full.dataUrl;img.alt=a.title+' by '+a.artist;img.hidden=false;$('#lightbox-status').hidden=true;
+  }catch(e){$('#lightbox-status').textContent=e.message;}
+}
+$('#lightbox-close').addEventListener('click',()=>$('#lightbox').close());
+$('#lightbox').addEventListener('click',e=>{if(e.target===$('#lightbox'))$('#lightbox').close();});
+
+/* ---------- confirmation dialog ---------- */
+function confirmAction({eyebrow='Confirm',title,text,okLabel='Confirm',note=false,danger=false}){
+  return new Promise(resolve=>{
+    const dlg=$('#confirm-dialog'),form=$('#confirm-form');
+    $('#confirm-eyebrow').textContent=eyebrow;$('#confirm-title').textContent=title;$('#confirm-text').textContent=text||'';
+    $('#confirm-note-wrap').hidden=!note;form.elements.note.value='';form.elements.note.required=note;
+    const ok=$('#confirm-ok');ok.textContent=okLabel;ok.className='button '+(danger?'button-danger':'button-primary');
+    let done=false;const finish=v=>{if(done)return;done=true;form.removeEventListener('submit',onSubmit);dlg.removeEventListener('close',onClose);if(dlg.open)dlg.close();resolve(v);};
+    const onSubmit=e=>{e.preventDefault();if(note&&!form.elements.note.value.trim()){form.elements.note.focus();toast('Add a note for the teacher.');return;}finish({note:form.elements.note.value.trim()});};
+    const onClose=()=>finish(null);
+    form.addEventListener('submit',onSubmit);dlg.addEventListener('close',onClose);
+    $$('[data-close-confirm]').forEach(b=>b.onclick=()=>finish(null));
+    dlg.showModal();if(note)form.elements.note.focus();
+  });
+}
+const ACTION_COPY={
+  approve:{title:'Approve artwork',text:'Approved artwork stays private until it is published.',ok:'Approve',past:'approved'},
+  publish:{title:'Publish to public gallery',text:'This makes the image viewable by anyone with its link and adds the artwork to the public gallery feed.',ok:'Publish',past:'published'},
+  unpublish:{title:'Unpublish artwork',text:'This removes the artwork from the public gallery feed and returns the Drive image to private.',ok:'Unpublish',past:'unpublished',danger:true},
+  changes:{title:'Request changes',text:'The teacher will see your note and can edit and resubmit.',ok:'Send request',past:'returned for changes',note:true},
+  archive:{title:'Archive artwork',text:'Archived artwork is hidden from the active list. The private image is kept in Drive and can be restored.',ok:'Archive',past:'archived',danger:true},
+  restore:{title:'Restore artwork',text:'The artwork returns to the review queue as Pending.',ok:'Restore',past:'restored'}
+};
+async function runAction(id,action){
+  const a=byId(id),copy=ACTION_COPY[action];if(!a||!copy)return false;
+  const answer=await confirmAction({eyebrow:a.title,title:copy.title,text:copy.text,okLabel:copy.ok,note:!!copy.note,danger:!!copy.danger});
+  if(!answer)return false;
+  $$(`[data-id="${CSS.escape(id)}"]`).forEach(b=>b.disabled=true);
+  try{const item=await call('reviewArtwork',id,action,answer.note||'');replaceItem(item);render();toast(`“${item.title}” ${copy.past}.`);return true;}
+  catch(e){toast(e.message);render();return false;}
+}
+
+/* ---------- events: toolbar, view, selection ---------- */
+['#search','#school-filter','#grade-filter','#year-filter','#status-filter'].forEach(id=>$(id).addEventListener(id==='#search'?'input':'change',render));
+$('#clear-filters').addEventListener('click',()=>{$('#search').value='';['#school-filter','#grade-filter','#year-filter','#status-filter'].forEach(id=>$(id).value='');render();});
+$('.notice-close').addEventListener('click',()=>$('.notice').remove());
+$$('[data-view]').forEach(button=>button.addEventListener('click',()=>{state.view=button.dataset.view;$$('[data-view]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});render();}));
+document.addEventListener('change',e=>{if(e.target.matches('[data-select]')){const id=e.target.dataset.select;e.target.checked?state.selected.add(id):state.selected.delete(id);updateSelection();}});
+$('#select-all').addEventListener('change',e=>{filtered().forEach(a=>e.target.checked?state.selected.add(a.id):state.selected.delete(a.id));render();});
+document.addEventListener('click',e=>{
+  const act=e.target.closest('[data-act]'),edit=e.target.closest('[data-edit]'),view=e.target.closest('[data-view-image]');
+  if(act&&!act.closest('#edit-dialog')){runAction(act.dataset.id,act.dataset.act);return;}
+  if(edit){openEdit(edit.dataset.edit);return;}
+  if(view){openLightbox(view.dataset.viewImage);}
 });
-reload().catch(e=>{msg(e.message);$('queue-message').textContent='Access or configuration error.';});
+$$('[data-bulk]').forEach(button=>button.addEventListener('click',async()=>{
+  const action=button.dataset.bulk,copy=ACTION_COPY[action],ids=[...state.selected];if(!ids.length)return;
+  const answer=await confirmAction({eyebrow:ids.length+' selected',title:copy.title,text:copy.text,okLabel:copy.ok+' '+ids.length,note:!!copy.note,danger:!!copy.danger});
+  if(!answer)return;
+  $$('[data-bulk]').forEach(b=>b.disabled=true);
+  try{
+    const results=await call('reviewArtworks',ids,action,answer.note||'');
+    const ok=results.filter(r=>r.ok),bad=results.filter(r=>!r.ok);
+    ok.forEach(r=>{replaceItem(r.item);state.selected.delete(r.id);});render();
+    toast(`${ok.length} artwork${ok.length===1?'':'s'} ${copy.past}.`+(bad.length?` ${bad.length} skipped: ${bad[0].error}`:''));
+  }catch(e){toast(e.message);}
+  finally{$$('[data-bulk]').forEach(b=>b.disabled=false);}
+}));
+$('#refresh-data').addEventListener('click',()=>{state.thumbRequested=new Set([...state.thumbRequested].filter(id=>state.thumbs.get(id)));load();});
+
+/* ---------- upload: Files → Details → Review ---------- */
+const uploadDialog=$('#upload-dialog'),uploadForm=$('#upload-form'),fileInput=$('#file-input'),dropZone=$('#drop-zone');
+let pendingFiles=[],previewURLs=[],uploadStep=1,uploading=false;
+function releasePreviews(){previewURLs.forEach(u=>URL.revokeObjectURL(u));previewURLs=[];}
+function showUploadStep(step){
+  uploadStep=step;$('#upload-step-files').hidden=step!==1;$('#upload-step-details').hidden=step!==2;$('#upload-step-review').hidden=step!==3;
+  $$('#upload-dialog .steps span').forEach((el,i)=>el.classList.toggle('active',i<step));
+}
+function resetUpload(){
+  uploadForm.reset();fileInput.value='';pendingFiles=[];releasePreviews();
+  $('#upload-image-previews').replaceChildren();$('#upload-file-status').textContent='No files selected';
+  $('#continue-upload').disabled=true;$('#upload-review-list').replaceChildren();$('#upload-summary').textContent='';
+  $('#submit-upload').disabled=false;$('#submit-upload').textContent='Add to review queue';showUploadStep(1);
+}
+function closeUpload(){if(uploading){toast('Please wait until the upload finishes.');return;}uploadDialog.close();resetUpload();}
+$$('[data-open-upload]').forEach(b=>b.addEventListener('click',()=>{resetUpload();uploadDialog.showModal();}));
+$$('[data-close-upload]').forEach(b=>b.addEventListener('click',closeUpload));
+uploadDialog.addEventListener('cancel',e=>{e.preventDefault();closeUpload();});
+$('#choose-files').addEventListener('click',e=>{e.stopPropagation();fileInput.click();});
+dropZone.addEventListener('click',e=>{if(e.target===dropZone||e.target.closest('.upload-glyph'))fileInput.click();});
+function handleFiles(list){
+  const files=Array.from(list||[]);if(!files.length)return;
+  const bad=files.find(f=>!ALLOWED.includes(f.type)||f.size>state.maxBytes||f.size===0);
+  if(bad){toast(`“${bad.name}” is not a JPG, PNG, or WebP image under ${Math.round(state.maxBytes/1048576)} MB.`);return;}
+  if(files.length>25){toast('Upload 25 or fewer images at a time.');return;}
+  pendingFiles=files.map(file=>({file,url:URL.createObjectURL(file),title:'',state:'waiting',error:''}));
+  releasePreviews();previewURLs=pendingFiles.map(p=>p.url);
+  const previews=$('#upload-image-previews');previews.replaceChildren();
+  pendingFiles.slice(0,8).forEach(p=>{const img=document.createElement('img');img.src=p.url;img.alt=p.file.name;previews.append(img);});
+  const total=files.reduce((s,f)=>s+f.size,0);
+  $('#upload-file-status').textContent=`${files.length} image${files.length===1?'':'s'} selected · ${fmtBytes(total)}`;
+  $('#file-summary-name').textContent=files.length===1?files[0].name:files.length+' artwork images';
+  $('#file-summary-size').textContent=fmtBytes(total)+' selected · details apply to every image';
+  const st=$('#file-summary-thumb');st.style.backgroundImage='url("'+pendingFiles[0].url+'")';st.classList.add('has-image');
+  $('#continue-upload').disabled=false;
+}
+fileInput.addEventListener('change',()=>handleFiles(fileInput.files));
+['dragenter','dragover'].forEach(t=>dropZone.addEventListener(t,e=>{e.preventDefault();dropZone.classList.add('dragover');}));
+['dragleave','drop'].forEach(t=>dropZone.addEventListener(t,e=>{e.preventDefault();dropZone.classList.remove('dragover');}));
+dropZone.addEventListener('drop',e=>{if(e.dataTransfer?.files?.length)handleFiles(e.dataTransfer.files);});
+$('#continue-upload').addEventListener('click',()=>{if(!pendingFiles.length){toast('Choose artwork images first.');return;}showUploadStep(2);uploadForm.elements.title.focus();});
+$('#change-files').addEventListener('click',()=>showUploadStep(1));
+$('#back-upload').addEventListener('click',()=>showUploadStep(1));
+$('#back-details').addEventListener('click',()=>{if(!uploading)showUploadStep(2);});
+function detailsValid(){
+  const f=uploadForm.elements;let first=null;
+  ['title','artist','school','grade','year','medium','style'].forEach(k=>{const ok=String(f[k].value).trim()!=='';f[k].setAttribute('aria-invalid',String(!ok));if(!ok&&!first)first=f[k];});
+  if(first){first.focus();toast('Complete every artwork detail.');return false;}
+  if(!f.consent.checked){f.consent.focus();toast('Confirm the artwork is cleared for district publication.');return false;}
+  return true;
+}
+$('#to-review').addEventListener('click',()=>{
+  if(!detailsValid())return;
+  const base=uploadForm.elements.title.value.trim();
+  pendingFiles.forEach((p,i)=>{if(p.state!=='done')p.title=pendingFiles.length>1?`${base} ${i+1}`:base;});
+  renderReview();showUploadStep(3);
+});
+function renderReview(){
+  const f=uploadForm.elements,list=$('#upload-review-list');list.replaceChildren();
+  pendingFiles.forEach((p,i)=>{
+    const li=document.createElement('li');
+    const img=document.createElement('img');img.src=p.url;img.alt='';
+    const body=document.createElement('div');
+    const label=document.createElement('label');label.textContent='Title for image '+(i+1);
+    const input=document.createElement('input');input.value=p.title;input.maxLength=120;input.disabled=p.state==='done'||uploading;
+    input.addEventListener('input',()=>{p.title=input.value;});label.append(input);
+    const small=document.createElement('small');small.textContent=p.file.name+' · '+fmtBytes(p.file.size)+(p.error?' · '+p.error:'');
+    body.append(label,small);
+    const st=document.createElement('span');st.className='upload-state '+p.state;
+    st.textContent={waiting:'Ready',uploading:'Uploading…',done:'Received',failed:'Failed'}[p.state];
+    li.append(img,body,st);list.append(li);
+  });
+  $('#upload-summary').textContent=`${f.artist.value} · ${f.school.value} · Grade ${f.grade.value} · ${f.year.value} · ${f.medium.value} · ${f.style.value}. Images are stored privately in Google Drive and enter the review queue as Pending.`;
+}
+function readBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=()=>rej(new Error('Could not read '+file.name));r.readAsDataURL(file);});}
+uploadForm.addEventListener('submit',async e=>{
+  e.preventDefault();if(uploadStep!==3||uploading)return;
+  const todo=pendingFiles.filter(p=>p.state!=='done');
+  if(todo.some(p=>!p.title.trim())){toast('Every image needs a title.');return;}
+  uploading=true;$('#submit-upload').disabled=true;$('#back-details').disabled=true;$('#cancel-review').disabled=true;
+  const f=uploadForm.elements;let ok=0,failed=0;
+  for(const p of todo){
+    p.state='uploading';p.error='';renderReview();
+    $('#submit-upload').textContent=`Uploading ${ok+failed+1} of ${todo.length}…`;
+    try{
+      const item=await call('submitArtwork',{base64:await readBase64(p.file),title:p.title.trim(),artist:f.artist.value,school:f.school.value,
+        gradeCreated:f.grade.value,schoolYearCreated:f.year.value,medium:f.medium.value,style:f.style.value,consentConfirmed:f.consent.checked});
+      p.state='done';ok++;replaceItem(item);
+    }catch(err){p.state='failed';p.error=err.message;failed++;}
+  }
+  uploading=false;$('#back-details').disabled=false;$('#cancel-review').disabled=false;renderReview();render();
+  if(!failed){toast(`${ok} artwork${ok===1?'':'s'} added to the private review queue.`);uploadDialog.close();resetUpload();load();}
+  else{$('#submit-upload').disabled=false;$('#submit-upload').textContent=`Retry ${failed} failed`;toast(`${ok} received, ${failed} failed. Fix the issue and retry.`);}
+});
+
+/* ---------- artwork record / edit panel ---------- */
+const editDialog=$('#edit-dialog'),editForm=$('#edit-form');
+let editToken=0;
+function canEdit(a){return state.canReview?a.status!=='Archived':['Pending','Needs Changes'].includes(a.status);}
+function openEdit(id){
+  const a=byId(id);if(!a)return;const f=editForm.elements,token=++editToken;
+  f.id.value=a.id;f.title.value=a.title;f.artist.value=a.artist;
+  fillSelect(f.school,state.schools,null,a.school);fillSelect(f.grade,GRADES,null,String(a.gradeCreated));fillSelect(f.year,YEARS,null,a.schoolYearCreated);
+  f.medium.value=a.medium;f.style.value=a.style;
+  const editable=canEdit(a);
+  ['title','artist','school','grade','year','medium','style'].forEach(k=>{f[k].disabled=!editable;f[k].removeAttribute('aria-invalid');});
+  $('#save-edit').hidden=!editable;
+  $('#edit-heading').textContent=editable?'Edit details':'Artwork details';
+  const meta=$('#edit-meta');meta.replaceChildren();
+  const line=(label,value)=>{if(!value)return;const d=document.createElement('div');const b=document.createElement('strong');b.textContent=label+': ';d.append(b,document.createTextNode(value));meta.append(d);};
+  const chip=document.createElement('span');chip.className='status status-'+statusClass(a.status);chip.textContent=a.status;meta.append(chip);
+  line('Submitted',`${new Date(a.submittedAt).toLocaleString()} by ${a.submittedBy}`);
+  line('Last review',a.reviewedBy?`${a.reviewedBy}${a.reviewedAt?' · '+new Date(a.reviewedAt).toLocaleString():''}`:'');
+  line('Published',a.publishedAt?new Date(a.publishedAt).toLocaleString():'');
+  if(a.reviewNote){const n=document.createElement('div');n.className='review-note';n.textContent='Reviewer note: '+a.reviewNote;meta.append(n);}
+  if(!editable){const d=document.createElement('div');d.textContent=state.canReview?'Restore this artwork to edit it.':'Details are locked after approval. Ask a reviewer for changes.';meta.append(d);}
+  else if(!state.canReview&&a.status==='Needs Changes'){const d=document.createElement('div');d.textContent='Saving resubmits this artwork for review.';meta.append(d);}
+  else if(state.canReview&&a.status==='Published'){const d=document.createElement('div');d.textContent='Saving also updates the public gallery listing.';meta.append(d);}
+  const wf=$('#edit-workflow');wf.replaceChildren();
+  if(state.canReview){
+    const opts={Pending:[['approve','Approve','button-primary'],['changes','Request changes','button-secondary'],['archive','Archive','button-danger']],
+      Approved:[['publish','Publish','button-publish'],['changes','Request changes','button-secondary'],['archive','Archive','button-danger']],
+      Published:[['unpublish','Unpublish','button-danger']],'Needs Changes':[['archive','Archive','button-danger']],Archived:[['restore','Restore','button-secondary']]}[a.status]||[];
+    opts.forEach(([act,label,cls])=>{const b=document.createElement('button');b.type='button';b.className='button '+cls;b.textContent=label;
+      b.addEventListener('click',async()=>{if(await runAction(a.id,act)){openEdit(a.id);}});wf.append(b);});
+  }
+  // Full-resolution original from Drive
+  const prev=$('#edit-preview');prev.style.backgroundImage='';prev.textContent='Loading full-resolution image…';prev.dataset.viewImage=a.id;$('#edit-preview-meta').textContent='';
+  if(!editDialog.open)editDialog.showModal();
+  if(!a.hasImage){prev.textContent='No stored image';return;}
+  fullImage(a.id).then(img=>{
+    if(token!==editToken)return;
+    prev.textContent='';prev.style.backgroundImage='url("'+img.dataUrl+'")';
+    const probe=new Image();probe.onload=()=>{if(token===editToken)$('#edit-preview-meta').textContent=`Original: ${probe.naturalWidth} × ${probe.naturalHeight} px · ${fmtBytes(img.bytes)} · click to enlarge`;};probe.src=img.dataUrl;
+  }).catch(e=>{if(token===editToken)prev.textContent=e.message;});
+}
+$$('[data-close-edit]').forEach(b=>b.addEventListener('click',()=>editDialog.close()));
+editForm.addEventListener('submit',async e=>{
+  e.preventDefault();const f=editForm.elements;let first=null;
+  ['title','artist','school','grade','year','medium','style'].forEach(k=>{const ok=String(f[k].value).trim()!=='';f[k].setAttribute('aria-invalid',String(!ok));if(!ok&&!first)first=f[k];});
+  if(first){first.focus();toast('Complete every artwork detail.');return;}
+  const save=$('#save-edit');save.disabled=true;save.textContent='Saving…';
+  try{
+    const item=await call('updateArtwork',f.id.value,{title:f.title.value,artist:f.artist.value,school:f.school.value,gradeCreated:f.grade.value,
+      schoolYearCreated:f.year.value,medium:f.medium.value,style:f.style.value});
+    replaceItem(item);render();editDialog.close();toast('Artwork details saved.');
+    if(item.status==='Published'&&!$('#public-grid').hidden&&$('#public-grid').children.length)loadPublic();
+  }catch(err){toast(err.message);}
+  finally{save.disabled=false;save.textContent='Save changes';}
+});
+
+/* ---------- public gallery feed preview ---------- */
+async function loadPublic(){
+  const grid=$('#public-grid'),st=$('#public-state');st.hidden=false;st.classList.remove('error');st.textContent='Loading the public gallery feed…';
+  try{
+    const items=await call('getPublicGalleryPreview');grid.replaceChildren();
+    st.textContent=items.length?`${items.length} published artwork${items.length===1?'':'s'} in the public feed.`:'The public gallery feed is empty.';
+    items.forEach(it=>{
+      const fig=document.createElement('figure');const img=document.createElement('img');img.loading='lazy';img.referrerPolicy='no-referrer';
+      img.src=it.image;img.alt=it.title+' by '+it.artist;img.onerror=()=>{img.alt='Public image link is not reachable';img.style.minHeight='180px';};
+      const cap=document.createElement('figcaption');const t=document.createElement('strong');t.textContent=it.title;
+      cap.append(t,document.createTextNode([it.artist,it.school,'Grade '+it.grade,it.school_year_created,it.medium].filter(Boolean).join(' · ')));
+      fig.append(img,cap);grid.append(fig);
+    });
+  }catch(e){st.classList.add('error');st.textContent=e.message;}
+}
+$('#load-public').addEventListener('click',loadPublic);
+$('#open-public').addEventListener('click',()=>setTimeout(loadPublic,50));
+
+load();
 })();
 </script>
 </body>
