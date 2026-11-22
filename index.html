@@ -525,20 +525,35 @@
       <div class="pc-wrap">
         <div class="pc-kicker">LVUSD STAFF RESOURCES</div>
         <h1>Tools for our arts educators.</h1>
-        <p class="pc-staff-lede">Staff applications and resources for district visual and performing arts programs.</p>
-        <div class="pc-staff-card">
-          <div><span class="pc-staff-tag">VISUAL ARTS</span><h2>Art Gallery Management</h2>
-            <p>Submit artwork, edit exhibition information, review submissions, and manage the Student Art Collection.</p>
-            <p class="pc-staff-warning">Sign in with your LVUSD Google account. Access is limited to approved pilot staff.</p>
-          </div>
-          <div class="pc-staff-actions"><a href="https://script.google.com/a/macros/lvusd.org/s/AKfycbx8gru5-IYWEbeqjZ6mUCkMIRZhXJBhfu4okk1aNFl5zUUR4tdiOmKe2C6zeGRDtajkIQ/exec" class="pc-gallery-primary">Open Art Gallery Management ↗</a><button data-go="visual" class="pc-staff-alt" type="button">View public gallery</button></div>
-        </div>
-        <div class="pc-staff-card">
-          <div><span class="pc-staff-tag">PERFORMING ARTS EDUCATION CENTERS</span><h2>PAEC Workspace</h2>
-            <p>Event planning, production details, staffing requests and approvals, crew assignments, calendars, and live event synopses for Agoura and Calabasas PAEC staff.</p>
-            <p class="pc-staff-warning">For authorized PAEC staff. Sign in when prompted to access your workspace.</p>
-          </div>
-          <div class="pc-staff-actions"><a href="https://paec-workspace-demo.cbloom438125.chatgpt.site/" class="pc-gallery-primary" target="_blank" rel="noopener noreferrer">Open PAEC Workspace ↗</a></div>
+        <p class="pc-staff-lede">Quick access to the tools supporting arts programs across LVUSD.</p>
+        <div class="pc-staff-directory">
+          <article class="pc-staff-card">
+            <div class="pc-staff-card-body">
+              <span class="pc-staff-tag">VISUAL ARTS</span>
+              <h2>Art Gallery Management</h2>
+              <p>Submit, review and publish student artwork for the district gallery.</p>
+            </div>
+            <div class="pc-staff-card-footer">
+              <span class="pc-staff-access">LVUSD Google sign-in · Pilot staff</span>
+              <div class="pc-staff-actions">
+                <a href="https://script.google.com/a/macros/lvusd.org/s/AKfycbx8gru5-IYWEbeqjZ6mUCkMIRZhXJBhfu4okk1aNFl5zUUR4tdiOmKe2C6zeGRDtajkIQ/exec" class="pc-gallery-primary" target="_blank" rel="noopener noreferrer">Open management <span aria-hidden="true">↗</span></a>
+                <button data-go="visual" class="pc-staff-alt" type="button">Public gallery</button>
+              </div>
+            </div>
+          </article>
+          <article class="pc-staff-card">
+            <div class="pc-staff-card-body">
+              <span class="pc-staff-tag">PERFORMING ARTS CENTERS</span>
+              <h2>PAEC Workspace</h2>
+              <p>Plan productions, coordinate crews, manage staffing and view event details.</p>
+            </div>
+            <div class="pc-staff-card-footer">
+              <span class="pc-staff-access">Authorized PAEC staff · Sign-in required</span>
+              <div class="pc-staff-actions">
+                <a href="https://paec-workspace-demo.cbloom438125.chatgpt.site/" class="pc-gallery-primary" target="_blank" rel="noopener noreferrer">Open workspace <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1113,22 +1128,24 @@
 @media(max-width:550px){#paecs-app .pc-artcollection-heading,#paecs-app .pc-gallery-heading{display:block}#paecs-app .pc-gallery-primary{margin-top:1rem}#paecs-app .pc-gallery-grid,#paecs-app .pc-artpreview-cards{grid-template-columns:1fr}#paecs-app .pc-gallery-filters{grid-template-columns:1fr}#paecs-app .pc-gallery-footer{display:block}#paecs-app .pc-gallery-card img{height:300px}}
 
 
-/* Staff Resources view: reuse established typography, colors and page chrome. */
+/* Staff Resources: compact, extensible application directory. */
 #paecs-app .pc-staff-quicklink{width:100% !important;text-align:left !important;cursor:pointer !important}
-#paecs-app .pc-staff-content{background:#f1e8d4 !important;min-height:70vh !important;color:#23313a !important;padding:clamp(2.5rem,5vw,4rem) 0 5rem !important}
-#paecs-app .pc-staff-content h1{font:600 clamp(2rem,4vw,3.5rem)/1.12 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.5rem 0 1rem !important}
-#paecs-app .pc-staff-lede{color:#46555e !important;max-width:64ch !important;font-size:1.05rem !important}
-#paecs-app .pc-staff-card{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:2rem !important;margin-top:2rem !important;background:#fffdf8 !important;border:1px solid #d8cbb8 !important;border-radius:12px !important;padding:clamp(1.3rem,3vw,2.2rem) !important;box-shadow:0 8px 22px #1c33410b !important}
-#paecs-app .pc-staff-card h2{font:600 1.8rem/1.2 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.6rem 0 !important}
-#paecs-app .pc-staff-card p{color:#43525c !important;font-size:.96rem !important;line-height:1.55 !important;max-width:62ch}
-#paecs-app .pc-staff-tag{color:#086a86 !important;font-size:.75rem !important;letter-spacing:.14em !important;font-weight:700 !important}
-#paecs-app .pc-staff-warning{border-left:3px solid #be8d31 !important;padding-left:.9rem !important}
-#paecs-app .pc-staff-actions{display:flex !important;flex-direction:column !important;gap:.7rem !important;min-width:205px !important}
-#paecs-app .pc-staff-actions .pc-gallery-primary{text-decoration:none !important;text-align:center !important;display:block !important}
-#paecs-app .pc-staff-alt{border:1px solid #bac4c6 !important;border-radius:6px !important;background:#fff !important;color:#0e596e !important;padding:.8rem 1rem !important;font-weight:650 !important;cursor:pointer !important}
+#paecs-app .pc-staff-content{background:#f1e8d4 !important;color:#23313a !important;min-height:0 !important;padding:clamp(2.2rem,4vw,3.5rem) 0 clamp(3rem,5vw,5rem) !important}
+#paecs-app .pc-staff-content h1{font:600 clamp(2rem,3.2vw,2.9rem)/1.12 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.4rem 0 .7rem !important}
+#paecs-app .pc-staff-lede{color:#46555e !important;max-width:64ch !important;font-size:1rem !important;line-height:1.5 !important;margin:0 !important}
+#paecs-app .pc-staff-directory{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:1rem !important;margin-top:1.8rem !important}
+#paecs-app .pc-staff-card{display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:space-between !important;gap:1.5rem !important;min-width:0 !important;margin:0 !important;background:#fffdf8 !important;border:1px solid #d8cbb8 !important;border-radius:12px !important;padding:clamp(1.15rem,2.1vw,1.7rem) !important;box-shadow:0 4px 14px rgba(28,51,65,.045) !important}
+#paecs-app .pc-staff-card h2{font:600 clamp(1.3rem,2vw,1.65rem)/1.22 'Fraunces',Georgia,serif !important;color:#23313a !important;margin:.45rem 0 .45rem !important}
+#paecs-app .pc-staff-card p{color:#43525c !important;font-size:.91rem !important;line-height:1.5 !important;margin:0 !important;max-width:48ch !important}
+#paecs-app .pc-staff-tag{color:#086a86 !important;font-size:.68rem !important;letter-spacing:.13em !important;font-weight:800 !important}
+#paecs-app .pc-staff-card-footer{display:flex !important;flex-direction:column !important;gap:.75rem !important}
+#paecs-app .pc-staff-access{color:#68747b !important;font-size:.76rem !important;line-height:1.35 !important}
+#paecs-app .pc-staff-actions{display:flex !important;flex-direction:row !important;align-items:stretch !important;flex-wrap:wrap !important;gap:.55rem !important;min-width:0 !important}
+#paecs-app .pc-staff-actions .pc-gallery-primary{display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:.35rem !important;width:auto !important;min-height:42px !important;padding:.65rem 1rem !important;text-align:center !important;text-decoration:none !important;font-size:.83rem !important;line-height:1.2 !important;border-radius:6px !important}
+#paecs-app .pc-staff-alt{min-height:42px !important;border:1px solid #bac4c6 !important;border-radius:6px !important;background:transparent !important;color:#0e596e !important;padding:.65rem .85rem !important;font-size:.83rem !important;font-weight:700 !important;cursor:pointer !important}
 #paecs-app .pc-gallery-stafflink{border:0 !important;color:#0d6178 !important;background:transparent !important;text-decoration:underline !important;text-underline-offset:3px !important;cursor:pointer !important;font:inherit !important}
 #paecs-app .pc-gallery-primary:focus-visible,#paecs-app .pc-staff-actions a:focus-visible,#paecs-app .pc-staff-actions button:focus-visible{outline:3px solid #167ca1 !important;outline-offset:3px !important}
-@media(max-width:720px){#paecs-app .pc-staff-card{display:block !important}#paecs-app .pc-staff-actions{margin-top:1.5rem !important}}
+@media(max-width:720px){#paecs-app .pc-staff-directory{grid-template-columns:minmax(0,1fr) !important;gap:.85rem !important}#paecs-app .pc-staff-card{gap:1.1rem !important}#paecs-app .pc-staff-actions .pc-gallery-primary{flex:1 1 auto !important}#paecs-app .pc-staff-alt{flex:1 1 auto !important}}
 
 /* Full student art gallery directly on the Visual Arts page, matching the approved filter treatment. */
 #paecs-app .pc-artcollection-intro.pc-gallery-content{background:#f1e8d4 !important;padding:3rem 0 4.2rem !important;min-height:0 !important}
