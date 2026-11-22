@@ -28,12 +28,14 @@ function config_() {
     secondary: value('SECONDARY_VAPA_GROUP'),
     reviewers: value('GALLERY_REVIEWERS_GROUP'),
     admins: value('GALLERY_ADMINS_GROUP'),
+    pilotOnly: value('PILOT_EMAIL_ONLY') === 'YES',
+    pilotReviewers: value('PILOT_REVIEWER_EMAILS').toLowerCase().split(',').map(s => s.trim()).filter(Boolean),
     allowlist: value('PILOT_ALLOWED_EMAILS').toLowerCase().split(',').map(s=>s.trim()).filter(Boolean),
     publicSharingApproved: value('DISTRICT_APPROVED_PUBLIC_SHARING') === 'YES'
   };
   if (!cfg.staffSheetId || !cfg.publicSheetId || !cfg.intakeFolderId) throw new Error('Staff gallery is not configured.');
   if (cfg.staffSheetId === cfg.publicSheetId) throw new Error('Private and public spreadsheet IDs must be different.');
-  if (!cfg.elementary || !cfg.secondary || !cfg.reviewers || !cfg.admins) throw new Error('Workspace staff groups have not been configured.');
+  if (!cfg.pilotOnly && (!cfg.elementary || !cfg.secondary || !cfg.reviewers || !cfg.admins)) throw new Error('Workspace staff groups have not been configured.');
   return cfg;
 }
 
@@ -57,6 +59,12 @@ function isGroupMember_(groupEmail, userEmail) {
 function mustBeAllowed_(needsReview) {
   const cfg = config_();
   const email = email_();
+  if (cfg.pilotOnly) {
+    if (!cfg.allowlist.includes(email)) throw new Error('This account is not authorized for gallery submissions.');
+    const reviewer = cfg.pilotReviewers.includes(email);
+    if (needsReview && !reviewer) throw new Error('Reviewer permission is required.');
+    return { email, role: reviewer ? 'reviewer' : 'teacher', cfg };
+  }
   const admin = isGroupMember_(cfg.admins, email);
   const reviewer = admin || isGroupMember_(cfg.reviewers, email);
   const submitter = reviewer || isGroupMember_(cfg.elementary, email) ||
