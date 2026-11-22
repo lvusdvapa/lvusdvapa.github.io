@@ -7,3 +7,8 @@
 .art-3{background-image:url('../assets/visual-arts-gallery/skeleton-alien-cat.png');background-position:center;background-size:cover}
 
 .brand-mark{font-size:.82rem;background:#0c6071;border-radius:9px;border-color:#d8ab42}.site-header{background:#092530}.brand strong{font-family:Georgia,serif;font-size:1.05rem;letter-spacing:0}.brand small{font-size:.61rem;letter-spacing:.18em}.site-footer a{color:#fff}.hero{padding-top:46px}.eyebrow{color:#116d91}
+
+/* Published sample artwork photographs (read-only gallery examples). */
+.art-1{background-image:url("https://lh3.googleusercontent.com/d/18cMZLMxLr0lmF_j_ZQk1dIEZGvib2f6t") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
+.art-2{background-image:url("https://lh3.googleusercontent.com/d/1IQCO-TK2mOf5tK3tDWpGTuNQPMiJMtBK") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
+.art-3{background-image:url("https://lh3.googleusercontent.com/d/1SiSSrZhmtvizLndp3rQ4p9FcutnKRGZg") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
