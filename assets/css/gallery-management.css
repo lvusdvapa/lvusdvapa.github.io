@@ -6,3 +6,8 @@
 .art-2{background-image:url('../images/tiger-artwork.png');background-position:center;background-size:cover}
 .art-3{background-image:url('../images/skeleton-alien-cat.png');background-position:center;background-size:cover}
 .avatar-button{display:grid;place-items:center}
+
+/* Published sample artwork photographs (read-only gallery examples). */
+.art-1{background-image:url("https://lh3.googleusercontent.com/d/18cMZLMxLr0lmF_j_ZQk1dIEZGvib2f6t") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
+.art-2{background-image:url("https://lh3.googleusercontent.com/d/1IQCO-TK2mOf5tK3tDWpGTuNQPMiJMtBK") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
+.art-3{background-image:url("https://lh3.googleusercontent.com/d/1SiSSrZhmtvizLndp3rQ4p9FcutnKRGZg") !important;background-position:center center !important;background-size:cover !important;background-repeat:no-repeat !important;background-color:#e7e4da !important;}
