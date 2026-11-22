@@ -2585,9 +2585,9 @@ plan: {
   q('gallery-search').addEventListener('input',render);
   q('gallery-close').addEventListener('click',()=>q('gallery-dialog').close());
   q('gallery-dialog').addEventListener('click',ev=>{if(ev.target===q('gallery-dialog'))q('gallery-dialog').close()});
-  const hash=location.hash.substring(1);
-  if(['visual','staffresources'].includes(hash)){
-    document.querySelectorAll('#paecs-app .pc-pg').forEach(p=>p.classList.toggle('pc-on',p.getAttribute('data-page')===hash));
+  const requestedPage = new URLSearchParams(location.search).get('page') || location.hash.substring(1);
+  if (['visual','staffresources'].includes(requestedPage)) {
+    document.querySelectorAll('#paecs-app .pc-pg').forEach(p => p.classList.toggle('pc-on',p.getAttribute('data-page')===requestedPage));
   }
   init();
 })();
