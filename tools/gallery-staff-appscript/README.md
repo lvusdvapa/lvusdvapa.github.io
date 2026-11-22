@@ -1,6 +1,13 @@
 # LVUSD Student Art Collection: authenticated staff application (staging)
 
-**Status (2026-11-22): deployed to the TEST ONLY Apps Script project and tested end-to-end against the TEST sheets/folder.** Production Sheets, Drive folders, the public feed script and the `main` branch are unchanged. The public Visual Arts page still reads the production feed.
+**Status (2026-11-22, 07:48 PT): LIVE.** The deployment linked from Staff Resources on the production site (`main`, Apps Script project "LVUSDVAPA Art Gallery – TEST ONLY.", deployment `AKfycbx8gru5…`) now publishes to the production **Art Gallery** sheet, which feeds the public Visual Arts page. Pilot email allowlist access is unchanged. A full end-to-end run was completed first against the TEST sheets/folder (see Test record below).
+
+Production Script Properties:
+- `PUBLIC_GALLERY_SHEET_ID` = production "Art Gallery" sheet (backup copy: "Art Gallery - BACKUP before staff app go-live 2026-11-22")
+- `STAFF_SUBMISSIONS_SHEET_ID` / `PRIVATE_INTAKE_FOLDER_ID` = "LVUSDVAPA - PRIVATE Staff Submissions (production)" and "Private Artwork Intake (production)", in the folder "LVUSDVAPA Art Gallery - PRODUCTION Staff (private)"
+- `DISTRICT_APPROVED_PUBLIC_SHARING=YES`, `PILOT_EMAIL_ONLY=YES` (allowlist + reviewer list unchanged)
+
+The three legacy sample artworks in the Art Gallery sheet have no private submission record, so the dashboard can't unpublish them. Edit those rows in the sheet directly.
 
 ## Staff dashboard (Staff.html)
 
