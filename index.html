@@ -1339,7 +1339,7 @@
     labels: {
       upcoming:    "Upcoming",
       past:        "Past",
-      backToHub:   "&larr; The PAECs",
+      backToHub:   "&larr; Back to VAPA Home",
       nextUp:      "Next up",
       tickets:     "Tickets &rarr;",
       reserve:     "Reserve seats &rarr;",
@@ -2226,15 +2226,28 @@ plan: {
     });
   }
 
-  function showPage(name, anchor){
+  function showPage(name, anchor, fromHistory){
+    if(!root.querySelector('.pc-pg[data-page="' + name + '"]')) name = "hub";
     each(root.querySelectorAll(".pc-pg"), function(p){
       p.classList.toggle("pc-on", p.getAttribute("data-page") === name);
     });
+    if(!fromHistory) {
+      var dest = name === "hub" ? location.pathname + location.search : "#" + name;
+      var current = location.hash || "";
+      if((name === "hub" && current !== "") || (name !== "hub" && current !== "#" + name)) {
+        history.pushState({vapaPage:name}, "", dest);
+      }
+    }
     var target = null;
     if(anchor) target = root.querySelector('[data-anchor="' + anchor + '"]');
     var el = target || root;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 20, behavior: "smooth" });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 20, behavior: fromHistory ? "instant" : "smooth" });
   }
+
+  window.addEventListener("popstate", function(){
+    var page = location.hash.substring(1);
+    showPage(page || "hub", null, true);
+  });
 
   root.addEventListener("click", function(ev){
     if(!ev.target.closest) return;
@@ -2572,7 +2585,6 @@ plan: {
   q('gallery-search').addEventListener('input',render);
   q('gallery-close').addEventListener('click',()=>q('gallery-dialog').close());
   q('gallery-dialog').addEventListener('click',ev=>{if(ev.target===q('gallery-dialog'))q('gallery-dialog').close()});
-  document.querySelectorAll('#paecs-app [data-go]').forEach(el=>el.addEventListener('click',()=>{const page=el.getAttribute('data-go');if(['visual','staffresources'].includes(page))history.replaceState(null,'','#'+page);else if(page==='hub')history.replaceState(null,'',location.pathname+location.search);}));
   const hash=location.hash.substring(1);
   if(['visual','staffresources'].includes(hash)){
     document.querySelectorAll('#paecs-app .pc-pg').forEach(p=>p.classList.toggle('pc-on',p.getAttribute('data-page')===hash));
